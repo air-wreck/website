@@ -1,0 +1,145 @@
+:root {
+  --main-color: #ff6138;
+  --light-grey: #999999;
+  --dark-grey: #333333;
+  --grey: #5d5d5d;
+}
+.header {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+.header a {
+  color: black;
+  display: inline;
+}
+.text {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+.text h1 {
+  font-size: 40pt;
+}
+.firstname {
+  font-weight: 100;
+}
+.lastname {
+  font-weight: 700;
+}
+.title {
+  font-variant: small-caps;
+  font-size: 12pt;
+  font-weight: 300;
+  color: var(--main-color);
+}
+.address {
+  font-style: italic;
+  font-size: 10pt;
+  color: var(--light-grey);
+}
+.icons li {
+  display: inline;
+}
+.icons li a {
+  color: var(--dark-grey);
+  font-family: "Roboto";
+  font-size: 10pt;
+  text-decoration: none;
+}
+.icons li + li:before {
+  content: "|";
+  padding: 0 10px;
+}
+.cvsection {
+  text-align: left;
+  padding-top: 30px;
+  color: var(--grey);
+  font-size: 11pt;
+  font-weight: 300;
+}
+.cvsection h2 {
+  color: var(--dark-grey);
+  border-bottom: 1px solid var(--dark-grey);
+  margin-bottom: 10px;
+}
+.color {
+  color: var(--main-color);
+}
+.cvsection .skills tr > :first-child {
+  font-weight: 700;
+  padding-right: 15px;
+  text-align: right;
+}
+.cventry {
+  padding-bottom: 10px;
+}
+.cventry h4 {
+  display: inline-block;
+}
+.cventry .place {
+  display: block;
+  float: right;
+  color: var(--main-color);
+  font-style: italic;
+  font-weight: 100;
+}
+.cventry .title {
+  font-variant: small-caps;
+  font-size: 9pt;
+  font-weight: 500;
+  color: var(--light-grey);
+}
+.cventry .time {
+  display: block;
+  float: right;
+  color: var(--light-grey);
+  font-style: italic;
+  font-weight: 100;
+  font-size: 10pt;
+}
+.cventry ul {
+  list-style-type: disc;
+  list-style-position: outside;
+}
+.cventry li {
+  font-family: "Roboto";
+  display: list-item;
+  margin-left: 20px;
+}
+.cvsection .honors {
+  width: 100%;
+}
+.cvsection .honors td {
+  font-size: 10pt;
+  padding: 0 5px;
+}
+.cvsection .honors tr > :last-child {
+  text-align: right;
+  color: var(--main-color);
+  font-style: italic;
+  font-weight: 100;
+}
+
+
+/* LaTeX! from: https://stackoverflow.com/questions/8160514/is-there-css-for-typesetting-the-latex-logo-in-html*/
+.latex sub, .latex sup {
+  text-transform: uppercase;
+}
+.latex sub {
+  vertical-align: -0.5ex;
+  margin-left: -0.1667em;
+  margin-right: -0.125em;
+}
+.latex, .latex sub {
+  font-size: 1em;
+  font-family: serif;
+}
+.latex sup {
+  font-size: 0.85em;
+  vertical-align: 0.15em;
+  margin-left: -0.36em;
+  margin-right: -0.15em;
+}
