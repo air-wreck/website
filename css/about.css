@@ -1,0 +1,23 @@
+.text {
+  width: 700px;
+  margin: 0 auto;
+}
+.text a {
+  color: black;
+}
+.text p {
+  font-weight: 300;
+}
+.q {
+  font-weight: 500;
+}
+.a {
+  font-weight: 300;
+}
+.keyblock {
+  display: inline-block;
+  font-family: monospace;
+  background-color: #edf3ff;
+  border-radius: 10px;
+  padding: 15px;
+}

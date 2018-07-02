@@ -122,6 +122,14 @@
   font-style: italic;
   font-weight: 100;
 }
+.home {
+  display: block;
+  width: 200px;
+  text-align: center;
+  margin: 0 auto;
+  color: black;
+  margin-bottom: 20px;
+}
 
 
 /* LaTeX! from: https://stackoverflow.com/questions/8160514/is-there-css-for-typesetting-the-latex-logo-in-html*/
@@ -138,6 +146,7 @@
   font-family: serif;
 }
 .latex sup {
+  font-family: serif;
   font-size: 0.85em;
   vertical-align: 0.15em;
   margin-left: -0.36em;
