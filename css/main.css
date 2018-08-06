@@ -105,3 +105,13 @@ html, body {
   background-color: gray;
   position: absolute;
 }
+
+/* extra styling points! */
+.code {
+  color: black;
+  font-family: monospace;
+  background-color: #cee1ff;
+  border-radius: 2px;
+  padding: 2px;
+  text-decoration: none;
+}
