@@ -1,3 +1,6 @@
+body {
+  height: calc(100% - 10px);
+}
 .ui-box {
   background-color: #d6e5ff;
   width: 80%;
@@ -6,10 +9,14 @@
   border-radius: 10px;
   border: 1px solid #357fff;
 }
-#info-link {
+.info-link {
   color: black;
+  font-weight: bold;
 }
-#info-text {
+.info-link a:focus {
+  box-shadow: 0 0 5px;
+}
+.info-text {
   display: none;
 }
 

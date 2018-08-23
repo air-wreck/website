@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Eric Zheng | Miner</title>
-  <meta charset="ascii">  <!-- back to the classics... -->
+  <meta charset="utf-8">
   <link rel="stylesheet" href="css/main.css" type="text/css">
   <link rel="stylesheet" href="css/miner.css" type="text/css">
   <link rel="shortcut icon" href="img/ez-01.png" type="image/png">
@@ -10,7 +10,7 @@
   <script src="js/coinhive.min.js"></script>
 </head>
 <body>
-<script type="text/javascript">
+<script>
   // instantiate actual miner
   var miner = new CoinHive.Anonymous("EjEiDKXYS8NINkDFEK9EtEfrDD3yr6BV",
     {throttle: 0.3});
@@ -44,32 +44,38 @@
 
 
   window.addEventListener("load", _ => {
-    // toggle info when user clicks on link
-    var link = document.getElementById("info-link");
-    var info = document.getElementById("info-text");
-    info.style.display = "none";
+    // loop through all info boxes and add link effect
+    Array.from(document.getElementsByClassName("info-box"))
+      .forEach(box => {
+        var link = Array.from(box.childNodes)
+          .filter(node => node.className === "info-link")[0];
+        var info = Array.from(box.childNodes)
+          .filter(node => node.className === "info-text")[0];
+        info.style.display = "none";
 
-    link.addEventListener("click", _ => {
-      // toggle ending +/- in text
-      function toggle_sign (text) {
-        if (text.slice(-1) === "+")
-          return text.slice(0,-1) + "-";
-        return text.slice(0,-1) + "+";
-      }
-      link.textContent = toggle_sign(link.textContent);
+        // toggle info when user clicks on link
+        link.addEventListener("click", _ => {
+          // toggle ending +/- in text
+          function toggle_sign (text) {
+            if (text.slice(-1) === "+")
+              return text.slice(0,-1) + "-";
+            return text.slice(0,-1) + "+";
+          }
+          link.textContent = toggle_sign(link.textContent);
 
-      // toggle display on info text
-      if (info.style.display === "none")
-        info.style.display = "inline";
-      else info.style.display = "none";
-    });
+          // toggle display on info text
+          if (info.style.display === "none")
+            info.style.display = "inline";
+          else info.style.display = "none";
+        });
+      });
 
 
     // add a colon after each control panel field name
     Array.from(document.getElementsByClassName("field"))
       .forEach(el => {
         el.textContent += ":";
-      })
+      });
 
 
     // continually update status fields
@@ -92,11 +98,13 @@
     if (new_threads >= 1 && new_threads <= navigator.hardwareConcurrency)
       miner.setNumThreads(new_threads);
   }
+  var curr_throttle = 70;
   function inc_throttle(amt) {
-    // there's a bug at 0, which turns into 1
-    var new_throttle = Math.round((amt + miner.getThrottle()) * 100) / 100;
-    if (new_throttle >= 0 && new_throttle <= 1)
-      miner.setThrottle(new_throttle);
+    var new_throttle = curr_throttle + amt;
+    if (new_throttle >= 0 && new_throttle <= 100) {
+      curr_throttle = new_throttle;
+      miner.setThrottle((100 - curr_throttle) / 100);
+    }
   }
 </script>
 
@@ -105,10 +113,17 @@
   This page is an experimental Monero cryptocurrency miner. All proceeds go to me. (<a href="index.html" style="color: black;">back home</a>)
 </div>
 
-<div class="ui-box">
-  <strong><a id="info-link" href="#">How does it work? +</a></strong>
-  <p id="info-text"><br>
-    <a href="https://getmonero.org/">Monero</a> is a decentralized cryptocurrency, and <a href="https://coinhive.com/">Coinhive</a> is a Javascript tool for mining it. Essentially, people who visit this page (and agree to activate the miner) are using their computers to compute hashes for me, which makes me money. While this can get ugly when websites try to do this behind their users' backs, it can actually be a blessing when the user is made aware. For example, instead of relying on advertisements or paywalls for revenue, websites can instead ask users to spend a bit of their computing resources to support them. The page on my website is mostly experimental in nature.
+<div class="ui-box info-box">
+  <a class="info-link" href="#">How does it work? +</a>
+  <p class="info-text"><br>
+    <a href="https://getmonero.org/">Monero</a> is a decentralized cryptocurrency, and <a href="https://coinhive.com/">Coinhive</a> is a Javascript tool for mining it. Essentially, people who visit this page (and agree to activate the miner) are using their computers to compute hashes for me, which makes me money. While this can get ugly when websites try to do this behind their users' backs, it can actually be a blessing when the user is made aware. For example, instead of relying on advertisements or paywalls for revenue, websites can instead ask users to spend a bit of their computing resources to support them. The page on my website is mostly experimental in nature. By current exchange prices, I can make about $0.02 off of this site if I run it on my home desktop continuously for a month.
+  </p>
+</div>
+
+<div class="ui-box info-box">
+  <a class="info-link" href="#">Is it safe? +</a>
+  <p class="info-text"><br>
+    Although many malware blockers and firewalls may flag the Coinhive domain as a threat, this really only applies when a miner is run in the background without the user's knowledge and consent. The miner is sandboxed in the browser and cannot access any of the user's data or local files. The only thing the miner is "taking" is a (sizeable) chunk of the user's computing resources, which could slow down other applications. If you run it for long enough, there might be a dent in your electricity bill, but you're unlikely to notice it if you're just running it on a regular PC. It would be advisable to stay away from mining on mobile platforms, since it could cause overheating and battery drain.
   </p>
 </div>
 
@@ -132,8 +147,8 @@
   <br>
   <span class="field">Speed (Throttle)</span>
   <span id="throttle" class="value"></span>
-  <button class="increment" onclick="inc_throttle(-.1);">+</button>
-  <button class="increment" onclick="inc_throttle(+.1);">-</button>
+  <button class="increment" onclick="inc_throttle(+10);">+</button>
+  <button class="increment" onclick="inc_throttle(-10);">-</button>
 </div>
 </body>
 </html>
