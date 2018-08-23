@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eric Zheng | Miner</title>
+  <meta charset="ascii">  <!-- back to the classics... -->
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+  <link rel="stylesheet" href="css/miner.css" type="text/css">
+  <link rel="shortcut icon" href="img/ez-01.png" type="image/png">
+
+  <script src="https://coinhive.com/lib/coinhive.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+  // instantiate actual miner
+  var miner = new CoinHive.Anonymous("EjEiDKXYS8NINkDFEK9EtEfrDD3yr6BV",
+    {throttle: 0.3});
+
+  function toggle_miner() {
+    var running = miner.isRunning();
+
+    // toggle miner running status
+    if (running)
+      miner.stop()
+    else miner.start(CoinHive.IF_EXCLUSIVE_TAB);
+    running = miner.isRunning();
+
+    // update status label
+    var status = document.getElementById("status");
+    var button = document.getElementById("switch");
+    if (running) {
+      status.style.color = "#066600";
+      status.textContent = "Active";
+      button.style.backgroundColor = "#ffffff";
+      button.style.color = "#357fff";
+      button.textContent = "Switch Off";
+    } else {
+      status.style.color = "#660800";
+      status.textContent = "Inactive";
+      button.style.backgroundColor = "#357fff";
+      button.style.color = "#ffffff";
+      button.textContent = "Switch On";
+    }
+  }
+
+
+  window.addEventListener("load", _ => {
+    // toggle info when user clicks on link
+    var link = document.getElementById("info-link");
+    var info = document.getElementById("info-text");
+    info.style.display = "none";
+
+    link.addEventListener("click", _ => {
+      // toggle ending +/- in text
+      function toggle_sign (text) {
+        if (text.slice(-1) === "+")
+          return text.slice(0,-1) + "-";
+        return text.slice(0,-1) + "+";
+      }
+      link.textContent = toggle_sign(link.textContent);
+
+      // toggle display on info text
+      if (info.style.display === "none")
+        info.style.display = "inline";
+      else info.style.display = "none";
+    });
+
+
+    // add a colon after each control panel field name
+    Array.from(document.getElementsByClassName("field"))
+      .forEach(el => {
+        el.textContent += ":";
+      })
+
+
+    // continually update status fields
+    var total = document.getElementById("total");
+    var rate = document.getElementById("rate");
+    var threads = document.getElementById("threads");
+    var throttle = document.getElementById("throttle");
+    setInterval(() => {
+      total.textContent = miner.getTotalHashes(true).toFixed(0);
+      rate.textContent = miner.getHashesPerSecond().toFixed(4);
+      threads.textContent = miner.getNumThreads().toFixed(0);
+      throttle.textContent = ((1-miner.getThrottle())*100).toFixed(0) + "%";
+    }, 500);
+  });
+
+
+  // increment threads and throttle by given amount
+  function inc_threads(amt) {
+    var new_threads = miner.getNumThreads() + amt;
+    if (new_threads >= 1 && new_threads <= navigator.hardwareConcurrency)
+      miner.setNumThreads(new_threads);
+  }
+  function inc_throttle(amt) {
+    // there's a bug at 0, which turns into 1
+    var new_throttle = Math.round((amt + miner.getThrottle()) * 100) / 100;
+    if (new_throttle >= 0 && new_throttle <= 1)
+      miner.setThrottle(new_throttle);
+  }
+</script>
+
+<div class="ui-box">
+  <h1>Coinhive Miner</h1>
+  This page is an experimental Monero cryptocurrency miner. All proceeds go to me. (<a href="index.html" style="color: black;">back home</a>)
+</div>
+
+<div class="ui-box">
+  <strong><a id="info-link" href="#">How does it work? +</a></strong>
+  <p id="info-text"><br>
+    <a href="https://getmonero.org/">Monero</a> is a decentralized cryptocurrency, and <a href="https://coinhive.com/">Coinhive</a> is a Javascript tool for mining it. Essentially, people who visit this page (and agree to activate the miner) are using their computers to compute hashes for me, which makes me money. While this can get ugly when websites try to do this behind their users' backs, it can actually be a blessing when the user is made aware. For example, instead of relying on advertisements or paywalls for revenue, websites can instead ask users to spend a bit of their computing resources to support them. The page on my website is mostly experimental in nature.
+  </p>
+</div>
+
+<div id="control" class="ui-box">
+  <h3>Miner Control Panel</h3> |
+  <span class="field">Miner Status</span>
+  <span id="status" class="value">Inactive</span>
+  <br>
+  <button id="switch" onclick="toggle_miner();">Switch On</button>
+  <br>
+  <span class="field">Total Hashes</span>
+  <span id="total" class="value"></span>
+  <br>
+  <span class="field">Hashes/sec</span>
+  <span id="rate" class="value"></span>
+  <br>
+  <span class="field">Thread Count</span>
+  <span id="threads" class="value"></span>
+  <button class="increment" onclick="inc_threads(+1);">+</button>
+  <button class="increment" onclick="inc_threads(-1);">-</button>
+  <br>
+  <span class="field">Speed (Throttle)</span>
+  <span id="throttle" class="value"></span>
+  <button class="increment" onclick="inc_throttle(-.1);">+</button>
+  <button class="increment" onclick="inc_throttle(+.1);">-</button>
+</div>
+</body>
+</html>

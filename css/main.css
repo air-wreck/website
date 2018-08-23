@@ -1,3 +1,4 @@
+/* fonts for website */
 @font-face {
   font-family: "Roboto Slab";
   font-style: normal;
@@ -72,6 +73,13 @@ html, body {
 .items li a {
   color: black;
   font-family: "Roboto Slab", serif;
+}
+#donations {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: black;
+  z-index: 2;
 }
 
 /* styling for the animation */

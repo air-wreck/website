@@ -1,0 +1,46 @@
+.ui-box {
+  background-color: #d6e5ff;
+  width: 80%;
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #357fff;
+}
+#info-link {
+  color: black;
+}
+#info-text {
+  display: none;
+}
+
+/* the actual miner control panel styling */
+#control {
+  line-height: 1.8;
+}
+#control h3 {
+  display: inline;
+}
+#control #status {
+  color: #660800;
+}
+#control button {
+  background-color: #357fff;
+  padding: 7px;
+  border-radius: 5px;
+  color: white;
+  border: 2px solid #357fff;
+}
+#control button:focus {
+  outline: none;
+}
+#control .increment {
+  padding: 0;
+  width: 15px;
+  text-align: center;
+}
+#control .value {
+  font-family: monospace;
+  background-color: #a8ccff;
+  padding: 3px;
+  border-radius: 5px;
+}
