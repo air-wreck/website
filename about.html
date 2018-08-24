@@ -11,32 +11,56 @@
   <div class="text" style="width: 600px; margin: 0 auto;">
     <h1>About Me</h1>
     <br>
-    <p>Wow, it's another generic developer website! Complete with a pointless Javascript animation!</p>
+    <p>Another generic developer website, complete with an inefficient Javascript animation!</p>
     <br>
-    <p>But yeah...I'm Eric, and I'm currently a junior at High Technology High School in Lincroft, NJ. I sometimes like computers (when they don't break on me). I also like Latin and stuff.</p>
+    <p>But yeah...I'm Eric, and I'm currently a rising senior at High Technology High School in Lincroft, NJ. I sometimes like computers (when they don't break on me). I also like Latin and stuff. Honestly, you can probably learn more about me as a student/employee from my <a href="resume.html">resume</a> and as a person from the <a href="fun.html">fun</a> page.</p>
     <br>
     <h3>Basic Bio</h3>
-    <div class="qa">
-      <span class="q">Name</span>
-      <span class="a">Eric Zheng</span>
+    <div id="bio">
+      <div class="qa">
+        <span class="q">Name</span>
+        <span class="a">Eric Zheng</span>
+      </div>
+      <div class="qa">
+        <span class="q">Age</span>
+        <span class="a">17</span>
+      </div>
+      <div class="qa">
+        <span class="q">Residence</span>
+        <span class="a">New Jersey</span>
+      </div>
+      <div class="qa">
+        <span class="q">Favorite language</span>
+        <span class="a">Latin</span>
+      </div>
+      <div class="qa">
+        <span class="q">Oh, that kind of language</span>
+        <span class="a">I'm fickle, but Haskell right now<br>I do have Javascript days, though</span>
+      </div>
     </div>
-    <div class="qa">
-      <span class="q">Age</span>
-      <span class="a">17</span>
-    </div>
-    <div class="qa">
-      <span class="q">Favorite Language</span>
-      <span class="a">Latin</span>
-    </div>
-    <div class="qa">
-      <span class="q">Oh, you mean that kind of language</span>
-      <span class="a">I'm fickle, but right now, (pointfree) Haskell, for the sheer mental gymnastics required to write it</span>
-    </div>
-    Ugh i'll finish this later
+    <br>
 
-    <pre class="keyblock">
------BEGIN PGP PUBLIC KEY BLOCK-----
+    Public key: <span class="code">curl https://air-wreck.gitlab.io/files/publickeys/gpg</span><br>
+    Or below:
+    <div class="pgp-block">
+      <button class="cpy" onclick="copy()">
+        <img src="img/cpy.svg" width="20" alt="Copy">
+      </button>
+      <textarea class="keyblock" cols="64" rows="29" spellcheck="false"></textarea>
+    </div>
+    <br>
+    <a href="index.html">(back home)</a>
+  </div>
+  <script>
+    function copy() {
+      var key = document.getElementsByClassName("keyblock")[0];
+      key.select();
+      document.execCommand("copy");
+    }
 
+    window.addEventListener("load", _ => {
+      var key = document.getElementsByClassName("keyblock")[0];
+      key.value = `-----BEGIN PGP PUBLIC KEY BLOCK-----
 mQENBFn2LQMBCACe/ynstvPGfU60gpwHJMo3oVqU/uZAmzrZHUAsF6jmb3dw8Mol
 7HR29CKgx3xBK8F29518shmPyMbyI4eV3kg+RhPRqRR0XTD/m1w8jzZpYN6hJxGs
 Bvwag34vw42cZ9V4YzCi0pRmYMwcLYk+Hrya8B4fGj4ydpjnYKrSeMgRUG6l3Rif
@@ -64,10 +88,8 @@ SpY2S1sXfxF5hC2utDpsLFju+FcTxNnBeykQ7jywkpv8tvpu9CTbXi9dVYHitB2f
 xNHa8Q8udo0DhSMOrcsuABFPQ0TJE0QPc3HeyYopta7O4roj67kHsfvdWJecWoRd
 YTBIQF6CwstDLpAJp0Sr5CcQ0Z9tPJCwZYJxhIOhHd0dCSHu/B6gztv3rw==
 =bjoM
------END PGP PUBLIC KEY BLOCK-----
-    </pre>
-    <br>
-    <a href="index.html">(back home)</a>
-  </div>
+-----END PGP PUBLIC KEY BLOCK-----`;
+    });
+  </script>
 </body>
 </html>
