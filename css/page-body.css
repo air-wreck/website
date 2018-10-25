@@ -1,0 +1,56 @@
+/* pretty page bodies, totally not inspired by Caltech's Avery House */
+.page-body {
+  max-width: 700px;;
+  margin: 0 auto;
+  font-family: "Roboto Slab", serif;
+}
+.page-body .page-logo {
+  width: 75px;
+  display: block;
+  margin: 10px auto;
+}
+.page-body header {
+  position: sticky;
+  background-color: white;
+  top: 0;
+}
+.page-body hr {
+  border-top: 1px solid #015f70;
+  border-bottom: none;
+  background-color: #015f70;
+}
+.page-body header ul {
+  text-align: center;
+  padding: 5px 0;
+  color: #015f70;
+}
+.page-body header li {
+  display: inline;
+  font-family: "Roboto Slab", serif;
+}
+.page-body header li + li:before {
+  content: " // ";
+}
+.page-body header a {
+  text-decoration: none;
+}
+.page-body a {
+  color: #015f70;
+  font-family: inherit;
+}
+.page-body * {
+  font-family: "Roboto Slab", serif;
+}
+.page-body .code {
+  font-family: monospace;
+}
+.page-body p {
+  padding: 5px 0;
+}
+.page-body main li {
+  list-style-position: outside;
+  margin-inline-start: 1.5em;
+}
+.page-body main {
+  padding-top: 10px;
+}

@@ -4,23 +4,13 @@
   --dark-grey: #333333;
   --grey: #5d5d5d;
 }
-.header {
-  width: 300px;
-  margin: 0 auto;
+.cvwrapper * {
+  font-family: "Roboto", sans-serif;
+}
+.cvheader {
   text-align: center;
-  font-weight: 300;
-  margin-bottom: 30px;
 }
-.header a {
-  color: black;
-  display: inline;
-}
-.text {
-  max-width: 800px;
-  margin: 0 auto;
-  padding-bottom: 30px;
-}
-.text h1 {
+.cvheader h1 {
   font-size: 40pt;
 }
 .firstname {
@@ -40,16 +30,17 @@
   font-size: 10pt;
   color: var(--light-grey);
 }
-.icons li {
+#icons li {
   display: inline;
+  margin-inline-start: 0;
 }
-.icons li a {
+#icons li a {
   color: var(--dark-grey);
   font-family: "Roboto";
   font-size: 10pt;
   text-decoration: none;
 }
-.icons li + li:before {
+#icons li + li:before {
   content: "|";
   padding: 0 10px;
 }

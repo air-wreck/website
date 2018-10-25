@@ -68,7 +68,7 @@ html, body {
   font-family: "Roboto Slab", serif;
 }
 .items li + li:before {
-    content: " // ";
+  content: " // ";
 }
 .items li a {
   color: black;
