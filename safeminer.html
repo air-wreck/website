@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Eric Zheng | Miner</title>
+  <title>Eric Zheng | Safe Miner</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/main.css" type="text/css">
   <link rel="stylesheet" href="css/miner.css" type="text/css">
   <link rel="shortcut icon" href="img/ez-01.png" type="image/png">
 
-  <script src="js/coinhive.min.js"></script>
+  <!-- let's not source *two* cryptojacking scripts locally... -->
+  <script src="https://authedmine.com/lib/authedmine.min.js?v8"></script>
 </head>
 <body>
+<style>
+  body {
+    background-color: #666666;
+  }
+  .ui-box {
+    /* uh...red means safe, right? */
+    background-color: #ff8e77;
+    border: 1px solid #ba2101;
+  }
+  #control button {
+    background-color: #666666;
+    border: 2px solid #666666;
+  }
+  #control .value {
+    background-color: #d1d1d1;
+  }
+</style>
+
 <script>
   // instantiate actual miner
   var miner = new CoinHive.Anonymous("EjEiDKXYS8NINkDFEK9EtEfrDD3yr6BV",
@@ -31,12 +50,12 @@
       status.style.color = "#066600";
       status.textContent = "Active";
       button.style.backgroundColor = "#ffffff";
-      button.style.color = "#357fff";
+      button.style.color = "#666666";
       button.textContent = "Switch Off";
     } else {
       status.style.color = "#660800";
       status.textContent = "Inactive";
-      button.style.backgroundColor = "#357fff";
+      button.style.backgroundColor = "#666666";
       button.style.color = "#ffffff";
       button.textContent = "Switch On";
     }
@@ -109,22 +128,8 @@
 </script>
 
 <div class="ui-box">
-  <h1>Coinhive Miner</h1>
-  This page is an experimental Monero cryptocurrency miner. All proceeds go to me. (<a href="index.html" style="color: black;">back home</a>)
-</div>
-
-<div class="ui-box info-box">
-  <a class="info-link" href="#">How does it work? +</a>
-  <p class="info-text"><br>
-    <a href="https://getmonero.org/">Monero</a> is a decentralized cryptocurrency, and <a href="https://coinhive.com/">Coinhive</a> is a Javascript tool for mining it. Essentially, people who visit this page (and agree to activate the miner) are using their computers to compute hashes for me, which makes me money. While this can get ugly when websites try to do this behind their users' backs, it can actually be a blessing when the user is made aware. For example, instead of relying on advertisements or paywalls for revenue, websites can instead ask users to spend a bit of their computing resources to support them. The page on my website is mostly experimental in nature. By current exchange prices, I can make about $0.02 off of this site if I run it on my home desktop continuously for a day.
-  </p>
-</div>
-
-<div class="ui-box info-box">
-  <a class="info-link" href="#">Is it safe? +</a>
-  <p class="info-text"><br>
-    Although many malware blockers and firewalls may flag the Coinhive domain as a threat, this really only applies when a miner is run in the background without the user's knowledge and consent. The miner is sandboxed in the browser and cannot access any of the user's data or local files. The only thing the miner is "taking" is a (sizeable) chunk of the user's computing resources, which could slow down other applications. If you run it for long enough, there might be a dent in your electricity bill, but you're unlikely to notice it if you're just running it on a regular PC. It would be advisable to stay away from mining on mobile platforms, since it could cause overheating and battery drain.
-  </p>
+  <h1>(Safer) Coinhive Miner</h1>
+  This page is a slightly less sketchy Monero cryptocurrency miner. After all, red = safe, right? All proceeds go to me. (<a href="miner.html" style="color: black;">back to regular miner</a>)
 </div>
 
 <div id="control" class="ui-box">
@@ -149,13 +154,6 @@
   <span id="throttle" class="value"></span>
   <button class="increment" onclick="inc_throttle(+10);">+</button>
   <button class="increment" onclick="inc_throttle(-10);">-</button>
-</div>
-
-<div class="ui-box info-box">
-  <a class="info-link" href="#">Behind enemy lines? +</a>
-  <p class="info-text"><br>
-    If you're somehow under a firewall that you cannot configure to allow traffic to Coinhive, that's okay! You can try mining from the Authed <a href="safeminer.html">miner</a>---basically Coinhive, except it <strong>always</strong> asks permission first. Also, permission lasts up to twenty-four hours (or until the end of the browser session---whichever comes first). Most firewalls and anti-malware programs <em>shouldn't</em> flag this miner as bad.
-  </p>
 </div>
 
 </body>
