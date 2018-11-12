@@ -62,4 +62,7 @@
   .page-body {
     padding: 20px;
   }
+  .page-body main li {
+    margin-inline-start: calc(1.5em + 20px);
+  }
 }
