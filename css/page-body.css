@@ -63,6 +63,7 @@
     padding: 20px;
   }
   .page-body main li {
-    margin-inline-start: calc(1.5em + 20px);
+    list-style-position: inside;
+    margin-inline-start: 0;
   }
 }
