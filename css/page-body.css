@@ -12,6 +12,7 @@
   padding: 10px 0;
 }
 .page-body header {
+  position: -webkit-sticky;
   position: sticky;
   background-color: white;
   top: 0;
