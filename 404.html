@@ -3,39 +3,51 @@
 <head>
   <title>Eric Zheng | 404 Not Found</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
   <link rel="stylesheet"
-        href="https://air-wreck.gitlab.io/css/main.css" type="text/css">
-  <link rel="shortcut icon" href="img/ez-01.png" type="image/png">
+        href="https://ericzheng.org/css/main.css" type="text/css">
+  <link rel="stylesheet"
+        href="https://ericzheng.org/css/index.css" type="text/css">
+  <link rel="shortcut icon"
+        href="https://ericzheng.org/img/ez-01.png" type="image/png">
 </head>
 <body>
-  <!-- is it really worth the effort to make another .css file just for
-       the 404 page? -->
+  <!-- I don't think it's worth it to make another stylesheet for 404 -->
   <style>
-    #container {
-      display: block;
-      width: 350px;
-      margin: 0 auto;
-      text-align: center;
-      top: 35%;
-      position: relative;
-      font-family: "Roboto Slab";
+    .text h1 {
+      font-size: 600%;
     }
-    h1 {
-      font-size: 700%;
+    .text {
+      font-family: "Roboto Slab", serif;
+    }
+    .text a {
+      color: white;
       font-family: inherit;
     }
-    a {
-      font-family: inherit;
-      color: black;
+    #saturn {
+      position: absolute;
+      top: 20px;
+      left: 60px;
+      width: 100px;
     }
   </style>
-  <div id="container">
-    <h1>404</h1>
-    whatever you're looking for, it's not here
-    <br>
-    (unless you were looking for the 404 page...)
-    <br>
-    <a href="https://ericzheng.org">(back home)</a>
+
+  <!-- just copy index page layout -->
+  <div id="text-container">
+    <div id="dots"></div>
+    <div id="lines"></div>
+    <div class="text">
+      <h1>404</h1>
+      whatever you're looking for, it's not here
+      <br>
+      (unless you were looking for the 404 page...)
+      <br>
+      <a href="https://ericzheng.org">(back home)</a>
+    </div>
   </div>
+  <img id="saturn" src="https://ericzheng.org/img/saturn.svg" alt="saturn">
+  <img id="telescope"
+       src="https://ericzheng.org/img/telescope.svg" alt="stargazing">
+  <script src="https://ericzheng.org/js/constellation.js"></script>
 </body>
 </html>

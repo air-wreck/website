@@ -2,6 +2,7 @@
 .page-body {
   max-width: 700px;;
   margin: 0 auto;
+  padding-bottom: 20px;
   font-family: "Roboto Slab", serif;
 }
 .page-body .page-logo {
@@ -54,4 +55,11 @@
 }
 .page-body main {
   padding-top: 10px;
+}
+
+/* add some padding so things don't look quished on narrow screens */
+@media (max-width: 740px) {
+  .page-body {
+    padding: 20px;
+  }
 }
