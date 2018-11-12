@@ -1,12 +1,43 @@
+/* constellation.js
+
+   draw random point constellations whenever the page reloads */
+
+/** PARAMETERS **/
+const DENSITY = 0.0001;      // stars per square pixel
+const MAX_LINE_LEN = 100.0;  // line threshold, in pixels
+
 var dots_div = document.getElementById("dots");
 var lines_div = document.getElementById("lines");
 
-/* current mouse position */
-var mouse = {x: 0, y: 0};
-document.addEventListener("mousemove", event => {
-  mouse.x = event.pageX;
-  mouse.y = event.pageY;
-});
+
+function draw_dots() {
+  // clear old dots and lines
+  while (dots_div.firstChild)
+    dots_div.removeChild(dots_div.firstChild);
+  while (lines_div.firstChild)
+    lines_div.removeChild(lines_div.firstChild);
+
+  // draw a bunch of random dots
+  let dots = [];
+  let no_dots = DENSITY * window.innerWidth * window.innerHeight;
+  for (let i = 0; i < no_dots; i++) {
+    let dot = document.createElement("div");
+    let x = Math.random() * (window.innerWidth - 5);
+    let y = Math.random() * (window.innerHeight - 5);
+    dot.className = "circle";
+    dot.style.left = `${x}px`;
+    dot.style.top = `${y}px`;
+    dots_div.appendChild(dot)
+    dots.push({x: x, y: y});
+  }
+
+  // draw a line between nearby dots
+  for (let i = 0; i < dots.length; i++) {
+    for (let j = i+1; j < dots.length; j++) {
+      draw_line(dots[i], dots[j], MAX_LINE_LEN);
+    }
+  }
+}
 
 /* draw a line between two points p1 and p2 if less than threshold apart */
 function draw_line(p1, p2, threshold) {
@@ -16,6 +47,9 @@ function draw_line(p1, p2, threshold) {
     let line = document.createElement("div");
     line.className = "line";
     line.style.width = dist + "px";
+    let color = Math.trunc(255 - 255 * dist / MAX_LINE_LEN).toString(16);
+    let digit = ("0" + color).slice(-2);
+    line.style.backgroundColor = `#${digit}${digit}${digit}`;
     lines_div.appendChild(line);
 
     /* get slope m between two points and inverse tangent of m */
@@ -40,54 +74,5 @@ function draw_line(p1, p2, threshold) {
   }
 }
 
-/* move all dots sequentially */
-var move = [];
-setInterval(() => {
-  /* clear all old lines */
-  while (lines_div.firstChild)
-    lines_div.removeChild(lines_div.firstChild);
-
-  /* execute all move functions */
-  let pos = move.map(m => m());
-
-  /* draw any new lines */
-  for (let i = 0; i < pos.length; i++) {
-    draw_line(pos[i], mouse, 100);
-    for (let j = i+1; j < pos.length; j++)
-      draw_line(pos[i], pos[j], 100);
-  }
-}, 5);
-
-/* initialize a dot */
-function init_dot(dot) {
-  /* provide random x, y, direction, and speed */
-  let x = Math.random() * (window.innerWidth - 5);
-  let y = Math.random() * (window.innerHeight - 5);
-  let ang = Math.random() * 2 * Math.PI;
-  let speed = Math.random() * 0.3 + 0.3;
-
-  dot.className = "circle";
-  dots_div.appendChild(dot);
-
-  /* tell this dot to move
-     yay for closures! */
-  move.push(() => {
-    x += speed * Math.cos(ang);
-    y += speed * Math.sin(ang);
-
-    if (x < 0 || x > window.innerWidth - 5)
-      ang = Math.PI - ang;
-    if (y < 0 || y > window.innerHeight - 5)
-      ang = 2 * Math.PI - ang;
-
-    dot.style.left = `${x}px`;
-    dot.style.top = `${y}px`;
-
-    /* return this dot's current position */
-    return {x: x, y: y};
-  });
-}
-
-/* init div with a bunch of random dots */
-for (let i = 0; i < 50; i++)
-  init_dot(document.createElement("div"));
+window.addEventListener("load", draw_dots);
+window.addEventListener("resize", draw_dots);
