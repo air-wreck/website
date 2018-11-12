@@ -1,0 +1,8 @@
+This is a note to myself on server configuration. I'm putting it here so that it's relatively out-of-the-way and yet completely backed up.
+
+To get sslforfree certs to work with Gitlab, verify the domain by adding TXT entries in the Namecheap control panel. You can verify that the entries have been added with `dig -t txt`. Note that it may take like an hour for sslforfree to recognize the entries.
+
+In Gitlab Pages settings, go to the first box: copy in the SSL cert, a blank line, and then the CA Bundle. In the second box, copy the private key. After waiting a few minutes, HTTPS should work.
+
+Troubleshooting:
+Test stuff in SSLLabs (https://www.ssllabs.com/ssltest/index.html)
