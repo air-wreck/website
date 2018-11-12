@@ -9,4 +9,5 @@ pages:
     - public
   only:
   - master
+  permalink: /.well-known/acme-challenge/sIfU-PSUMqjHBZMoyg5ktAMh83-Y9eH0_NqqiM_Mu6I/index.html
 
