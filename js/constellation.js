@@ -76,3 +76,4 @@ function draw_line(p1, p2, threshold) {
 
 window.addEventListener("load", draw_dots);
 window.addEventListener("resize", draw_dots);
+window.addEventListener("wheel", draw_dots);
