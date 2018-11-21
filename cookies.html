@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Cookies!</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+  <link rel="stylesheet" href="css/index.css" type="text/css">
+  <link rel="shortcut icon" href="img/ez-01.png" type="image/png">
+</head>
+<body>
+  <style>
+    #text-container {
+      background-image: linear-gradient(45deg, #42f4a4, #b541f4)
+    }
+    .text {
+      background-color: rgba(233, 233, 233, 0.7);
+      color: black;
+    }
+    .section {
+      max-width: 600px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 70px 5px;
+    }
+    .code-block {
+      text-align: left;
+      font-family: monospace;
+      background-color: #eeeeee;
+      padding: 5px;
+      border-radius: 5px;
+      overflow: scroll;
+    }
+    .code-block strong {
+      font-family: monospace;
+    }
+  </style>
+  <div id="text-container">
+    <div class="text">
+      <h1>Cookies.</h1>
+      <p>(You <em>know</em> you want them.)</p>
+    </div>
+    <div style="position: absolute; top: 80%;">
+      <h1>&#x2c5;</h1>
+    </div>
+  </div>
+  </div>
+  <div style="text-align: center; padding: 30px;">
+    <h1 style="font-weight: 100;"><strong>Rogue Robotics</strong> is selling cookies.</h1>
+    <p style="font-weight: 300; padding: 50px 5px; max-width: 600px; margin: 0 auto;">
+      Here at <a style="color: black;" href="https://rogueroboticsclub.github.io">Rogue Robotics</a>, we put excellence into everything that we do, and that includes cookies. Our cookies have variously been called "the best cookies east of the Mississippi", "the best cookies north of the Mississippi", and "the best cookies in the Mississippi". Read on to find out why.
+    </p>
+  </div>
+  <div style="background-image: linear-gradient(135deg, #f47a42, #f4d941);">
+    <div class="section">
+      <h1>Who are we?</h1>
+      <p>Just read the website linked above.</p>
+    </div>
+    <div class="section">
+      <h1>What is this website?</h1>
+      <p>
+        A lot of vendors are trying to sell your cookies these days. But how many of those vendors have a generic-looking static website to peddle their wares? This website exists to inform you about how wonderful the Rogue Robotics cookies are. Not only will you support a good cause, but you can rest assured that your cookies are coming from people who have a fine sense of aesthetics.
+      </p>
+    </div>
+    <div class="section">
+      <h1>How do I make a purchase?</h1>
+      <p>
+        When (not if) you're ready to order, just shoot an email to <a style="color: black;" href="mailto:cookies@ericzheng.org">cookies@ericzheng.org</a>. If you're not comfortable using email, that's okay! Just see Eric Zheng in-school. However, if you opt for in-person purchase, make sure not to fall victim to known scammers like Rishi Salwi and Sam Uwe Alws. Their cookies are known to be of inferior quality to those offered by Eric Zheng.
+      </p>
+    </div>
+  </div>
+  <div style="text-align: center;">
+    <div class="section">
+      <h1 style="font-weight: 100;">Our <strong>Catalogue</strong></h1>
+      <br>
+      <p style="font-weight: 300;">
+        We are proud to report that our cookies are sustainably sourced, respondibly managed, and competitively priced: we're the literal image of ethical capitalism. You can view our complete catalogue <a style="color: black;" href="files/pdf/cookies.pdf">here</a>. All doughs are certified Kosher and contain zero grams of trans fat or preservatives: the perfect holiday gift!
+      </p>
+      <br>
+      <p>
+        Just how competitive is our pricing, you ask? Well, let the code speak for itself:
+      </p>
+      <br>
+      <pre class="code-block">
+<strong>import</strong> System.Random
+<strong>import</strong> System.Random.Shuffle
+
+determine_best_vendor :: RandomGen g => [String] -> g -> IO String
+determine_best_vendor vendors =
+  return . (!!0) . (shuffle' vendors $ length vendors)
+
+main :: IO ()
+main =
+  newStdGen >>= (determine_best_vendor ["Eric", "Sam", "Rishi"]) >>= print</pre>
+      <br>
+      <pre class="code-block">
+<strong>$</strong> ghci
+<strong>Prelude></strong> :l vendors.hs
+<strong>*Main></strong> main
+"Eric"
+</pre>
+      <br>
+      <p>Listen...the code is in Haskell, so it <em>literally</em> has to be right.</p>
+    </div>
+  </div>
+</body>
+</html>
