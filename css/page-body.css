@@ -57,6 +57,9 @@
 .page-body main {
   padding-top: 10px;
 }
+.page-body tt {
+  font-family: monospace;
+}
 
 /* add some padding so things don't look quished on narrow screens */
 @media (max-width: 740px) {

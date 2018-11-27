@@ -11,9 +11,18 @@
     html {
       background-color: black;
       color: white;
-      text-align: center;
+      font-family: monospace;
+      overflow-Y: scroll;
+      overflow-wrap: break-word;
     }
   </style>
-  <tt>is the linux kernel a null space?</tt>
+  <span id="zero"></span>
+  <script>
+    const zero = document.getElementById("zero");
+    const speed = 100000;  // characters per second
+    setInterval(() => {
+      zero.textContent += "0";
+    }, 1000.0 / speed);
+  </script>
 </body>
 </html>

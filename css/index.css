@@ -26,6 +26,9 @@
   right: 20px;
   width: 50px;
 }
+::selection {
+  background-color: #f47142;
+}
 
 /* styling for the animation */
 #dots {
