@@ -4,7 +4,7 @@ pages:
   - mkdir .public
   - cp -r * .public
   - mv .public public
-  - mv public/.public/302.html public/.public/resume.html
+  - mv public/302.html public/resume.html
   artifacts:
     paths:
     - public
