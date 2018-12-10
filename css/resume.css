@@ -100,6 +100,9 @@
   display: list-item;
   margin-left: 20px;
 }
+.cventry a {
+  color: inherit;
+}
 .cvsection .honors {
   width: 100%;
 }
