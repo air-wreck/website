@@ -47,7 +47,7 @@ function draw_line(p1, p2, threshold) {
     let line = document.createElement("div");
     line.className = "line";
     line.style.width = dist + "px";
-    let color = Math.trunc(255 - 255 * dist / MAX_LINE_LEN).toString(16);
+    let color = Math.trunc(255 - 220 * dist / MAX_LINE_LEN).toString(16);
     let digit = ("0" + color).slice(-2);
     line.style.backgroundColor = `#${digit}${digit}${digit}`;
     lines_div.appendChild(line);
