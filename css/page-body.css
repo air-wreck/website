@@ -1,48 +1,75 @@
-/* pretty page bodies, totally not inspired by Caltech's Avery House */
+/* this website's design was originally based on Caltech's Avery House, but for
+   obvious reasons, I'm not feeling a lot of love for Caltech right now
+   so I'm going to design it based on the MIT Admissions website
+   hopefully this won't jinx we for Pi Day... */
+
 .page-body {
   max-width: 700px;
   margin: 0 auto;
   padding-bottom: 20px;
-  font-family: "Roboto Slab", serif;
+  font-family: "Roboto", sans-serif;
 }
-.page-body .page-logo {
-  width: 75px;
-  display: block;
-  margin: 0px auto;
-  padding: 10px 0;
-}
+
+/** PAGE HEADER BAR **/
 .page-body header {
-  position: -webkit-sticky;
-  position: sticky;
-  background-color: white;
+  left: 0;
   top: 0;
+  position: fixed;
+  width: 100%;
 }
-.page-body hr {
-  border-top: 1px solid #015f70;
-  border-bottom: none;
-  background-color: #015f70;
+.page-body header hr {
+  height: 5px;
+  background-image: linear-gradient(90deg, #1b9185, #aadd5d);
 }
-.page-body header ul {
-  text-align: center;
+
+/** NAVIGATION BAR **/
+.page-body nav {
+  display: flow-root;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+.page-body nav span {
+  float: left;
+  color: gray;
+  font-size: 300%;
+  font-weight: 100;
+}
+.page-body nav br {
+  font-size: 300%;
+  display: none;
+}
+.page-body nav ul {
+  float: right;
   padding: 5px 0;
-  color: #015f70;
+  color: gray;
 }
-.page-body header li {
+.page-body nav li {
   display: inline;
-  font-family: "Roboto Slab", serif;
+  font-family: "Roboto", sans-serif;
 }
-.page-body header li + li:before {
+.page-body nav li + li:before {
   content: " // ";
 }
-.page-body header a {
+.page-body nav a {
+  color: gray;
   text-decoration: none;
 }
+.page-body nav a:hover {
+  text-decoration: underline;
+}
+
+/** CONTENT STYLING **/
+.page-body hr {
+  border: none;
+  height: 2px;
+  background-image: linear-gradient(90deg, #f49542, #bc254d);
+}
 .page-body a {
-  color: #015f70;
+  color: black;
   font-family: inherit;
 }
-.page-body * {
-  font-family: "Roboto Slab", serif;
+.page-body :not(tt) {
+  font-family: "Roboto", sans-serif;
 }
 .page-body .code {
   font-family: monospace;
@@ -56,9 +83,7 @@
 }
 .page-body main {
   padding-top: 10px;
-}
-.page-body tt {
-  font-family: monospace;
+  line-height: 1.5em;
 }
 
 /* add some padding so things don't look quished on narrow screens */
@@ -69,5 +94,21 @@
   .page-body main li {
     list-style-position: inside;
     margin-inline-start: 0;
+  }
+  .page-body nav {
+    text-align: center;
+  }
+  .page-body nav br {
+    display: inline;
+  }
+  .page-body nav span {
+    float: none;
+    display: inline;
+    padding: 0;
+  }
+  .page-body nav ul {
+    float: none;
+    position: relative;
+    top: -10px;
   }
 }

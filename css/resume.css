@@ -6,6 +6,7 @@
 }
 .cvwrapper * {
   font-family: "Roboto", sans-serif;
+  line-height: normal;
 }
 .cvheader {
   text-align: center;
@@ -137,6 +138,12 @@
 }
 .latex, .latex sub {
   font-size: 1em;
+  font-family: serif;
+}
+.cvwrapper .latex {
+  font-family: serif;
+}
+.page-body .latex {
   font-family: serif;
 }
 .latex sup {
