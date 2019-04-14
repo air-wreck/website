@@ -68,7 +68,7 @@
   color: black;
   font-family: inherit;
 }
-.page-body :not(tt) {
+.page-body :not(tt, .fa) {  /* I'm going to have to actually fix this soon */
   font-family: "Roboto", sans-serif;
 }
 .page-body .code {
