@@ -11,13 +11,14 @@
     body {
       text-align: center;
       font-family: monospace;
-      font-size: 65pt;
+      font-size: 24pt;
     }
     a {
       color: black;
       text-decoration: none;
     }
   </style>
-  <a href="https://xkcd.com/221/"><tt>(\_ -> 4)</tt></a>
+  <a href="https://xkcd.com/221/"><tt>id . (\_ -> foldl (+) 0 $ take (succ 3) $ repeat 1) $ null<tt></a>
 </body>
 </html>
+
