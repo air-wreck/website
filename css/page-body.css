@@ -1,7 +1,4 @@
-/* this website's design was originally based on Caltech's Avery House, but for
-   obvious reasons, I'm not feeling a lot of love for Caltech right now
-   so I'm going to design it based on the MIT Admissions website
-   hopefully this won't jinx we for Pi Day... */
+/* styling for the "content body" on each page */
 
 .page-body {
   max-width: 700px;
@@ -86,7 +83,7 @@
   line-height: 1.5em;
 }
 
-/* add some padding so things don't look quished on narrow screens */
+/* add some padding so things don't look squished on narrow screens */
 @media (max-width: 740px) {
   .page-body {
     padding: 20px;
