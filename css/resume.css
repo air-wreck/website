@@ -108,7 +108,7 @@
   width: 100%;
 }
 .cvsection .honors td {
-  font-size: 10pt;
+  /* font-size: 10pt; */
   padding: 0 5px;
 }
 .cvsection .honors tr > :last-child {
@@ -152,4 +152,8 @@
   vertical-align: 0.15em;
   margin-left: -0.36em;
   margin-right: -0.15em;
+}
+.has-latex {
+  position: relative;
+  top: 2px;
 }
