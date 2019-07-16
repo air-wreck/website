@@ -50,6 +50,9 @@ html, body {
 tt {
   font-family: monospace;
 }
+cite {  /* should be default, but just in case */
+  font-style: italic;
+}
 
 .items ul {
   text-align: center;
