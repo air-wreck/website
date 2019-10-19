@@ -57,6 +57,16 @@
   border-bottom: 1px solid var(--dark-grey);
   margin-bottom: 10px;
 }
+.cvsplit {
+  width: 47%;
+  margin-bottom: 20px;
+}
+.cvsplit-left {
+  float: left;
+}
+.cvsplit-right {
+  float: right;
+}
 .color {
   color: var(--main-color);
 }
@@ -64,6 +74,7 @@
   font-weight: 700;
   padding-right: 15px;
   text-align: right;
+  vertical-align: top;
 }
 .cventry {
   padding-bottom: 10px;
@@ -153,7 +164,8 @@
   margin-left: -0.36em;
   margin-right: -0.15em;
 }
-.has-latex {
+/* holdover from old days, might as well preserve it */
+.has-latex > {
   position: relative;
   top: 2px;
 }
