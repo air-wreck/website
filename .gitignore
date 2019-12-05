@@ -1,4 +1,6 @@
 *.DS_Store
+*.swp
+erdos.html
 
 # purposely hidden files
 hidden/*
