@@ -1,6 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Eric Zheng | G&ouml;del</title>
@@ -152,13 +151,13 @@
     <p>To give an example of what I mean by a derivation, consider again the rule of double negation. We will introduce a punctuation mark "<span class="mtnt">.</span>" into mTNT to separate statements in the derivation. Now define <span class="num">(m,n)</span> via:</p>
     <blockquote>
       <span class="num">m</span> is the G&ouml;del number of "<span class="mtnt">&not;(&not;(&not;(&not;P))).&not;(&not;P).P</span>"
-      <br>
+      <br />
       <span class="num">n</span> is the G&ouml;del number of "<span class="mtnt">P</span>"
     </blockquote>
     <p>Now is <span class="num">(m,n)</span> a valid proof pair? Well, assuming that the first line <span class="num">&not;(&not;(&not;(&not;P)))</span> is a valid axiom of mTNT, then the answer is yes, because:</p>
     <ol>
       <li>The derivation corresponding to <span class="num">m</span> is a valid one. In particular, each line follows logically from the preceding ones according to the rules of mTNT: it is just two applications of the rule of double negation. (Technically, there is also the matter of lifting the parenthesis, but we will not get bogged down in details.)</li>
-      <li>The last line of the derivation corresponding to <span class="num">m</span> is <span class="mTNT">P</span>, whose G&ouml;del number is indeed <span class="num">n</span>.</li>
+      <li>The last line of the derivation corresponding to <span class="num">m</span> is <span class="mtnt">P</span>, whose G&ouml;del number is indeed <span class="num">n</span>.</li>
     </ol>
     <p>It is important to note that checking whether <span class="num">(m,n)</span> is indeed a proof pair is in general a very trivial (if tedious) mechanical process:</p>
     <ol>
@@ -194,7 +193,7 @@
       <span class="mtnt">{111&ctdot;111}={1}</span>
     </center>
     <p>where there are <span class="num">123456</span> of the <span class="mtnt">1</span>'s within the curly braces. Clearly, this is a nonsensical statement, very much like most English phrases, which are nonsensical when quined. But we use this example to illustrate the tools needed to use quining in mTNT.</p>
-    <p>Let us call a natural number <span class="num">b</span> the <em>quine</em> of the natural number <span class="num">a</span> if and only if <span class="num">b</span> is the G&ouml;del number of a statement which is obtained by quining the statement whose G&ouml;del number is <span class="num">a</span>. Now quining is a simple arithmetical substitution; like proof-pairs, it is easy but tedious to check if some number <span class="num">b</span> is the quine of <span class="num">a</span>. In fact, such a check is bounded, which implies that quine-hood is a primitive recursive property. As with proof-pairs, there is a predicate of mTNT that is capable of checking whether <span class="num">b</span> is the quine of <span class="num">a</span>. We aren't interested in its exact form; we will refer to this predicate opaquely as <span class="mtnt">IS-QUINE(a,b)</span>.</p>
+    <p>Let us call a natural number <span class="num">b</span> the <em>quine</em> of the natural number <span class="num">a</span> if and only if <span class="num">b</span> is the G&ouml;del number of a statement which is obtained by quining the statement whose G&ouml;del number is <span class="num">a</span>. Now quining is a simple arithmetical substitution; like proof pairs, it is easy but tedious to check if some number <span class="num">b</span> is the quine of <span class="num">a</span>. In fact, such a check is bounded, which implies that quine-hood is a primitive recursive property. As with proof pairs, there is a predicate of mTNT that is capable of checking whether <span class="num">b</span> is the quine of <span class="num">a</span>. We aren't interested in its exact form; we will refer to this predicate opaquely as <span class="mtnt">IS-QUINE(a,b)</span>.</p>
     <p>Now we will construct the mTNT analogue of the phrase "when quined, is false". Consider the statement:</p>
     <center>
       <span class="mtnt">&not;(&exist;b)(IS-THEOREM(b) &and; IS-QUINE(a,b))</span>
