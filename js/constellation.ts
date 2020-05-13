@@ -206,24 +206,18 @@ function delaunay(points: Point[]): Edge[] {
   return solution.concat(L).concat(R);
 }
 
-// return list of edges and number of vertices visited
+// return list of vertices visited
 function dfs(adj_list, v) {
   var vertex = adj_list[v];
-  var E: Edge[] = [];
-  var n: number = 1;
+  var V: number[] = [v];
 
   vertex.visited = true;
   for (let i = 0; i < vertex.neighbors.length; i++) {
     let neighbor = vertex.neighbors[i];
-    if (!adj_list[neighbor].visited) {
-      E.push({u: vertex.vertex, v: adj_list[neighbor].vertex});
-
-      var recur = dfs(adj_list, neighbor);
-      E = E.concat(recur.edges);
-      n += recur.size;
-    }
+    if (!adj_list[neighbor].visited)
+      V = V.concat(dfs(adj_list, neighbor));
   }
-  return {edges: E, size: n};
+  return V;
 }
 
 function constellate() {
@@ -328,8 +322,13 @@ function constellate() {
   while (A.some(vertex => !vertex.visited)) {
     var next = A.filter(vertex => !vertex.visited)[0].idx;
     var component = dfs(A, next);
-    if (component.size > 3)
-      component.edges.forEach(edge => draw_line(edge.u, edge.v));
+    if (component.length > 3) {
+      component.forEach(u => {
+        A[u].neighbors.forEach(v => {
+          draw_line(A[u].vertex, A[v].vertex);
+        });
+      });
+    }
   }
 }
 

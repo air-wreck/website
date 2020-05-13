@@ -56,7 +56,7 @@
   height: 100%;
   overflow: hidden;
   /* background-color: black; */
-  background-image: linear-gradient(135deg, black, #33001b);
+  background-image: linear-gradient(135deg, #000066, #33001b);
 }
 .line {
   height: 1px;

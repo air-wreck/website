@@ -43,6 +43,10 @@
 html, body {
   height: 100%;
 }
+body {
+  background-size: 20px 20px;
+  background-image: radial-gradient(circle, #cccccc 1px, rgba(204,204,204,0) 1px);
+}
 ::selection {
   /* consider changing based on light or dark tag on <body> */
   background-color: #ffd987;

@@ -168,22 +168,17 @@ function delaunay(points) {
     }
     return solution.concat(L).concat(R);
 }
-// return list of edges and number of vertices visited
+// return list of vertices visited
 function dfs(adj_list, v) {
     var vertex = adj_list[v];
-    var E = [];
-    var n = 1;
+    var V = [v];
     vertex.visited = true;
     for (var i = 0; i < vertex.neighbors.length; i++) {
         var neighbor = vertex.neighbors[i];
-        if (!adj_list[neighbor].visited) {
-            E.push({ u: vertex.vertex, v: adj_list[neighbor].vertex });
-            var recur = dfs(adj_list, neighbor);
-            E = E.concat(recur.edges);
-            n += recur.size;
-        }
+        if (!adj_list[neighbor].visited)
+            V = V.concat(dfs(adj_list, neighbor));
     }
-    return { edges: E, size: n };
+    return V;
 }
 function constellate() {
     // clear old dots and lines
@@ -277,8 +272,13 @@ function constellate() {
     while (A.some(function (vertex) { return !vertex.visited; })) {
         var next = A.filter(function (vertex) { return !vertex.visited; })[0].idx;
         var component = dfs(A, next);
-        if (component.size > 3)
-            component.edges.forEach(function (edge) { return draw_line(edge.u, edge.v); });
+        if (component.length > 3) {
+            component.forEach(function (u) {
+                A[u].neighbors.forEach(function (v) {
+                    draw_line(A[u].vertex, A[v].vertex);
+                });
+            });
+        }
     }
 }
 // draw a line between two points p1 and p2
