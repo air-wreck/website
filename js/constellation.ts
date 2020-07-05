@@ -1,6 +1,7 @@
 /* constellation.js
 
-   draw random point constellations whenever the page reloads */
+   draw random point constellations whenever the page reloads
+   note to self: compile with 'tsc constellation.ts --lib dom,es2015' */
 
 /** PARAMETERS **/
 const FOREGROUND_DENSITY = 0.00007;      // stars per square pixel
