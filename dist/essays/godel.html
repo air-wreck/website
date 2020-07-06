@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Eric Zheng | G&ouml;del</title>
+  <meta name="viewport" content="width=device-width" />
+  <link rel="shortcut icon" href="../img/ez-01.png" type="image/png" />
+  <style>
+    @font-face {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400;
+      src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+    }
+    @font-face {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 700;
+      src: url("../fonts/Roboto-Bold.ttf") format("truetype");
+    }
+    @font-face {
+      font-family: "Latin Modern Math";
+      font-style: normal;
+      font-weight: 400;
+      /* convert this to TTF or WOFF once I get back to US */
+      src: url("../fonts/latinmodern-math.otf") format("opentype");
+    }
+    main {
+      max-width: 600px;
+      padding: 10px;
+      margin: 0 auto;
+      font-family: Roboto, sans-serif;
+    }
+    .author {
+      font-size: 10pt;
+      padding: 2px;
+    }
+    .author tt {
+      font-size: 9pt;
+    }
+    h1 {
+      border: 1px solid black;
+      padding: 5px;
+      font-size: 12pt;
+      text-align: center;
+    }
+    h2 {
+      margin: 5px 0;
+      border-bottom: 1px dotted black;
+      font-size: 11pt;
+    }
+    h2 span {
+      color: white;
+      background-color: black;
+      padding: 1px;
+    }
+    p {
+      font-size: 11pt;
+    }
+    li {
+      font-size: 11pt;
+    }
+    blockquote {
+      font-size: 11pt;
+      margin: 1em 0;
+      padding: 0 20px;
+      border-left: 4px solid black;
+    }
+    .num {  /* regular math */
+      font-family: Latin Modern Math, serif;
+    }
+    .mtnt {  /* statements of mTNT */
+      font-family: Latin Modern Math, serif;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>An Exposition of G&ouml;del's First Incompleteness Theorem</h1>
+    <center class="author">
+      Eric Zheng
+      <tt>&lt;ericzheng@cmu.edu&gt;</tt>
+    </center>
+    <center class="author">
+      <time>
+        January 4, 2020
+      </time>
+      (Version 1)
+    </center>
+
+    <h2><span>Introduction</span></h2>
+    <p>In this document, I'd like to make an informal presentation of G&ouml;del's first incompleteness theorem, a very beautiful result of mathematical logic. The discussion is inspired by Douglas Hofstadter's famous book <cite>G&ouml;del, Escher, Bach: An Eternal Golden Braid</cite>, except very much condensed. In fact, there is little original content; my aim is to collect in an accessible format what I consider to be the key parts of Hofstadter's presentation of G&ouml;del's proof, which are scattered throughout the several hundred pages of his book.</p>
+    <p>Firefox reader claims that this document should take roughly twenty minutes to read. However, my prose is not always the clearest, so it may take longer. I expect that the reader has some mathematical background about equal to a first semester college course in pure mathematics; for example, familiarity with propositional logic is assumed.</p>
+
+    <h2><span>Statement of the Theorem</span></h2>
+    <p>G&ouml;del's theorem describes a fundamental limitation in the power of any "sufficiently powerful" axiomatic system. What is meant here by "sufficient power" is that the system is expressive enough to represent statements of number theory, such as "four times five equals twenty" and "ten is not a prime number". When we speak of number theory, we are interested here in only the natural numbers.</p>
+    <p>Specifically, G&ouml;del proved the following:</p>
+    <blockquote>
+      As defined above, no sufficiently powerful axiomatic system can be both consistent and complete.
+    </blockquote>
+    <p>We'd better define what we mean by consistency and completeness:</p>
+    <ul>
+      <li><em>Consistency:</em> the system does not contradict itself. More concretely, if <span class="num">P</span> is a statement of number theory, then <span class="num">P</span> and <span class="num">&not;P</span> are not both theorems of this system.</li>
+      <li><em>Completeness:</em> there are no undecidable statements. If <span class="num">P</span> is a statement of number theory, then either <span class="num">P</span> or <span class="num">&not;P</span> is a theorem of this system.</li>
+    </ul>
+
+    <h2><span>Summary of the Proof</span></h2>
+    <p>G&ouml;del proved his theorem by combining a few ingenious ideas:</p>
+    <ol>
+      <li><em>G&ouml;del numbering:</em> by encoding number theory using numbers, G&ouml;del realized that statements of arithmetic could be turned into statements <em>about</em> arithmetic. Using this kind of self-reference, it is possible to make number theory talk about itself.</li>
+      <li><em>Proof pairs:</em> the notion of theoremhood (and in fact, any of the so-called "primitive recursive" properties) is itself expressible within such an axiomatic system. In other words, number theory can talk about which statements are theorems of number theory.</li>
+      <li><em>Quining:</em> by cleverly quoting a statement about quoting, it is possible to make a statement of number theory that talks about itself, the ultimate form of self-reference.
+    </ol>
+    <p>I will elaborate on each of these ideas, but their end goal is to produce the G&ouml;del sentence <span class="num"><em>G</em></span>, which is a logical statement that asserts:</p>
+    <blockquote>
+      The statement <span class="num"><em>G</em></span> is not a theorem of number theory.
+    </blockquote>
+    <p>It is not immediately obvious whether <span class="num"><em>G</em></span> is a theorem of number theory or not. Either way, the construction of such a sentence exposes a deep flaw in any axiomatic system that is powerful enough to express number theory.</p>
+    <p>Now if <span class="num"><em>G</em></span> is indeed a theorem of number theory, then we are in deep trouble, since if number theory is sound (i.e. its theorems are true), then <span class="num"><em>G</em></span> asserts that it is not a theorem of number theory, which is a contradiction. Thus the arithmetic of the natural numbers would be proven inconsistent, which is a rather unpleasant result.</p>
+    <p>But on the other hand, if <span class="num"><em>G</em></span> is not a theorem of number theory, then we must concede that <span class="num"><em>G</em></span> is a true statement. We have proven the incompleteness of any axiomatic system of number theory: there is a true statement <span class="num"><em>G</em></span> which is not a theorem of our system!</p>
+
+    <h2><span>Typographical Number Theory</span></h2>
+    <p>To speak about G&ouml;del's proof, it is useful to have a reference axiomatic system so that we may talk concretely about statements of number theory. There are many axiomatic systems that are powerful enough for this task, such as the Zermelo-Fraenkel set theory or the system of Whitehead and Russell's <cite>Principia Mathematica</cite>. In keeping with Hofstadter, I will use a modified version of the system that he calls typographical number theory.</p>
+    <p>In the modified typographical number theory (mTNT), we represent each number using tagged tally marks. For example, we can represent the number <span class="num">1</span> as <span class="mtnt">{1}</span> and the number <span class="num">7</span> as <span class="mtnt">{1111111}</span>. The number <span class="num">0</span> is represented by the empty tally <span class="mtnt">{}</span>. We will additionally define the addition (<span class="mtnt">+</span>), multiplication (<span class="mtnt">&times;</span>), and equality (<span class="mtnt">=</span>) operators with their usual meaning.</p>
+    <p>Onto this basic framework of natural numbers we bolt the machinery of propositional logic, such as the universal and existential quantifiers <span class="mtnt">&forall;</span> and <span class="mtnt">&exist;</span>. Significantly, we add variables such as <span class="mtnt">a</span>, <span class="mtnt">b</span>, <span class="mtnt">c</span>, and so on. We need not worry about running out of symbols for variable names, since we can always produce a new variable name by appending a prime (<span class="mtnt">'</span>) to another variable name. In fact, it would suffice to name all our variables <span class="mtnt">a</span>, <span class="mtnt">a'</span>, <span class="mtnt">a''</span>, and so on, but it is pointless to strain the reader's eyes with this strict notation.</p>
+    <p>What are the axioms and rules of inference of mTNT? We will not make them explicit (it is not the purpose of this document to build a new formalization of number theory), but one can imagine fleshing out the system with a scheme similar to the Peano arithmetic and usual laws of propositional logic.</p>
+    <p>Nothing presented in the rest of the proof will be tied to our choice of mTNT; the techniques that G&ouml;del employed are quite general and apply to any similarly powerful axiomatic system.</p>
+
+    <h2><span>G&ouml;del Numbering</span></h2>
+    <p>The idea of G&ouml;del numbering is a simple but powerful one: let us associate with each typographical symbol a unique number. Once we do this, every statement of number theory itself becomes a number! For example, consider the statement "seven is prime". We can represent this statement in mTNT as:</p>
+      <center>
+        <span class="mtnt">&not;((&exist;a,b)(a&times;b={1111111} &and; &not;(a={1} &or; b={1})))</span>
+      </center>
+      <p>or "there do not exist natural numbers <span class="num">a</span> and <span class="num">b</span> such that <span class="num">a&times;b=7</span> and neither <span class="num">a</span> nor <span class="num">b</span> is <span class="num">1</span>". The numerical assignment for each symbol is arbitrary; for instance, we might let a left parenthesis be <span class="num">23</span>, and we might let a right curly brace be <span class="num">17</span>. As long as the encoding is unambiguous, all that matters is this:</p>
+    <blockquote>
+      Any statement of number theory can be expressed as a finite string of symbols taken from a finite alphabet. Hence it is possible to associate each statement with a unique number, which we will term its <em>G&ouml;del number</em>.
+    </blockquote>
+    <p>In fact, a particularly nice way of interpreting this fact (at least to a programmer) is that if our alphabet has, say, <span class="num"><em>N</em></span> symbols, then every statement of number theory that is expressible in our axiomatic system becomes one massive base-<span class="num"><em>N</em></span> number: that statement's G&ouml;del number.</p>
+    <p>What does this insight net us? Well, since each statement is now a number, we can do arithmetic on statements! We get a new way of interpreting our axiomatic system: statements about arithmetic are now statements of arithmetic as well. To give a concrete example, consider the following somewhat trivial rule of propositional logic:</p>
+    <blockquote>
+      If a statement of the form <span class="mtnt">&not;(&not;P)</span> is a theorem of mTNT, then so is <span class="mtnt">P</span>.
+    </blockquote>
+    <p>This is just the rule of double negation. Now suppose we encode logical negation "<span class="mtnt">&not;</span>" as the number <span class="num">78</span>, left parenthesis "<span class="mtnt">(</span>" as the number <span class="num">17</span>, and right parenthesis "<span class="mtnt">)</span>" as the number <span class="num">15</span>. Then we can consider the following analogous rule about <span class="num">p</span>, which is the G&ouml;del number of <span class="mtnt">P</span>:</p>
+    <blockquote>
+      If a number of the form <span class="num">781778p15</span> is the G&ouml;del number of a theorem of mTNT, then so is the number <span class="num">p</span>.
+    </blockquote>
+    <p>At first, this doesn't seem terribly useful, but recall that any natural number can be represented within mTNT using the curly brace notation. For example, we can speak of the theorem <span class="mtnt">&not;(&not;P)</span> by referring to the number <span class="mtnt">{111&ctdot;111}</span>, where there are <span class="num">781778p15</span> of the <span class="mtnt">1</span>'s in the curly braces. (Note here that <span class="num">p</span> is not a variable of mTNT but a specific, rather large number.) This is very unwieldy, but it means that we can refer implicitly to statements of number theory within other statements of number theory, which is the first major stepping stone in G&ouml;del's proof.</p>
+
+    <h2><span>Proof Pairs</span></h2>
+    <p>In order to construct the G&ouml;del sentence <span class="num"><em>G</em></span>, we need to figure out how to represent the notion of theoremhood within number theory itself. To do this, we introduce the concept of <em>proof pairs</em>. We say that the natural numbers <span class="num">(m,n)</span> form a proof pair if and only if <span class="num">m</span> is the G&ouml;del number of a valid derivation in mTNT and <span class="num">n</span> is the G&ouml;del number of the last line of that derivation.</p>
+    <p>To give an example of what I mean by a derivation, consider again the rule of double negation. We will introduce a punctuation mark "<span class="mtnt">.</span>" into mTNT to separate statements in the derivation. Now define <span class="num">(m,n)</span> via:</p>
+    <blockquote>
+      <span class="num">m</span> is the G&ouml;del number of "<span class="mtnt">&not;(&not;(&not;(&not;P))).&not;(&not;P).P</span>"
+      <br />
+      <span class="num">n</span> is the G&ouml;del number of "<span class="mtnt">P</span>"
+    </blockquote>
+    <p>Now is <span class="num">(m,n)</span> a valid proof pair? Well, assuming that the first line <span class="num">&not;(&not;(&not;(&not;P)))</span> is a valid axiom of mTNT, then the answer is yes, because:</p>
+    <ol>
+      <li>The derivation corresponding to <span class="num">m</span> is a valid one. In particular, each line follows logically from the preceding ones according to the rules of mTNT: it is just two applications of the rule of double negation. (Technically, there is also the matter of lifting the parenthesis, but we will not get bogged down in details.)</li>
+      <li>The last line of the derivation corresponding to <span class="num">m</span> is <span class="mtnt">P</span>, whose G&ouml;del number is indeed <span class="num">n</span>.</li>
+    </ol>
+    <p>It is important to note that checking whether <span class="num">(m,n)</span> is indeed a proof pair is in general a very trivial (if tedious) mechanical process:</p>
+    <ol>
+      <li>Is <span class="num">m</span> indeed a valid derivation of mTNT? We need to check that the statement whose G&ouml;del number is <span class="num">m</span> is well-formed and that each line in the derivation follows logically from the previous ones using the axioms that we have.</li>
+      <li>Is <span class="num">n</span> indeed the last line of the derivation given in <span class="num">m</span>? This is very easy to check.
+    </ol>
+    <p>The key point is that these two checks involve a finite, bounded number of steps; the process is long and boring but is ultimately an arithmetical one that is guaranteed to terminate within a certain bound. Because of this, it is one of the so-called "primitive recursive" properties of computer science. Another example of a primitive recursive property is primality.</p>
+    <p>What is remarkable about primitive recursive properties is that they can all be expressed as predicates within mTNT. I do not know the proof of this fact, but it means that there exists <em>some</em> predicate, probably very complicated, that we shall call <span class="mtnt">PROOF-PAIR(m,n)</span>, which is true if and only if the natural numbers <span class="mtnt">m</span> and <span class="mtnt">n</span> form a proof pair. Armed with such a predicate, it becomes simple to represent within mTNT the property of theoremhood for a statement with G&ouml;del number <span class="num">b</span>: define the predicate <span class="mtnt">IS-THEOREM(b)</span> to be equivalent to <span class="mtnt">(&exist;a)(PROOF-PAIR(a,b))</span>. In other words, "there exists some natural number <span class="mtnt">a</span> which forms a proof pair with <span class="num">b</span>".</p>
+
+    <h2><span>Quining and the Epimenides Paradox</span></h2>
+    <p>What we ultimately want to do is to construct a sentence that is very similar to the following paradoxical statement attributed to the Greek philosopher Epimenides:</p>
+    <blockquote>
+      This sentence is false.
+    </blockquote>
+    <p>At this point, we have made several important advances toward our goal of constructing the G&ouml;del sentence <span class="num"><em>G</em></span>: we have figured out how to get mTNT to talk about itself, and we have figured out how to represent the notion of theoremhood within mTNT. The tricky part that remains is to figure out how to achieve self-reference in a statement of number theory&mdash;to construct a statement that talks about its <em>own</em> theoremhood.</p>
+    <p>To do this, we turn to a concept that is probably familiar to a reader who enjoys computer programming puzzles: that of quining. (In the language of mathematics, such an argument is typically called <em>diagonalization</em> after a famous proof by Cantor, but in keeping with Hofstadter I will use the programming term.) In programming, a <em>quine</em> is a program that prints out its own source code. This is commonly accomplished by preceding (or succeeding) a program by its own quotation, an action that we shall call "quining". For instance, the quine of "is a sentence fragment" is:</p>
+    <blockquote>
+      "is a sentence fragment" is a sentence fragment.
+    </blockquote>
+    <p>Now quining ordinary statements usually leads to some hilarity, because the resulting statements often make little sense. But something curious occurs when we quine a statement that itself speaks about the act of quining. Consider quining the statement "when quined, is false":</p>
+    <blockquote>
+      "when quined, is false" when quined, is false.
+    </blockquote>
+    <p>But this is precisely "when quined, is false" when quined! Hence this is a sentence that is its own subject: an unusual form of self-reference that does not rely on slippery phrases of the English language such as "this sentence". A closer inspection reveals that this is quite analogous to the Epimenides paradox, and it gives us a blueprint for how to achieve the same effect within mTNT.</p>
+
+    <h2><span>Constructing the G&ouml;del Sentence</span></h2>
+    <p>We are finally ready to construct <span class="num"><em>G</em></span>. We will first construct a predicate of mTNT, with one free variable, that corresponds to the statement "when quined, is false". To do this, we will need a way to talk about quining within mTNT. The analogous operation to quining within mTNT is to replace all free variables within a statement with <em>that statement's own G&ouml;del number</em>. For example, consider the statement <span class="num">a=1</span>, which is represented within mTNT as:</p>
+    <center>
+      <span class="mtnt">a={1}</span>
+    </center>
+    <p>Now suppose our numbering scheme leads to this statement's G&ouml;del number being <span class="num">123456</span>. Quining this statement then leads to <span class="num">123456=1</span>, or within mTNT:</p>
+    <center>
+      <span class="mtnt">{111&ctdot;111}={1}</span>
+    </center>
+    <p>where there are <span class="num">123456</span> of the <span class="mtnt">1</span>'s within the curly braces. Clearly, this is a nonsensical statement, very much like most English phrases, which are nonsensical when quined. But we use this example to illustrate the tools needed to use quining in mTNT.</p>
+    <p>Let us call a natural number <span class="num">b</span> the <em>quine</em> of the natural number <span class="num">a</span> if and only if <span class="num">b</span> is the G&ouml;del number of a statement which is obtained by quining the statement whose G&ouml;del number is <span class="num">a</span>. Now quining is a simple arithmetical substitution; like proof pairs, it is easy but tedious to check if some number <span class="num">b</span> is the quine of <span class="num">a</span>. In fact, such a check is bounded, which implies that quine-hood is a primitive recursive property. As with proof pairs, there is a predicate of mTNT that is capable of checking whether <span class="num">b</span> is the quine of <span class="num">a</span>. We aren't interested in its exact form; we will refer to this predicate opaquely as <span class="mtnt">IS-QUINE(a,b)</span>.</p>
+    <p>Now we will construct the mTNT analogue of the phrase "when quined, is false". Consider the statement:</p>
+    <center>
+      <span class="mtnt">&not;(&exist;b)(IS-THEOREM(b) &and; IS-QUINE(a,b))</span>
+    </center>
+    <p>Let us call this statement <span class="num">G<sub>0</sub></span>. In English, this statement says that "there does not exist a <span class="num">b</span> such that <span class="num">b</span> is the G&ouml;del number of a theorem of mTNT and <span class="num">b</span> is the quine of <span class="num">a</span>": a statement which speaks of quining. All that is left to do is to quine this very statement. Suppose the G&ouml;del number of <span class="num">G<sub>0</sub></span> is <span class="num">g</span>. Then the G&ouml;del sentence <span class="num"><em>G</em></span>, in all its glory, is:</p>
+    <center>
+      <span class="mtnt">&not;(&exist;b)(IS-THEOREM(b) &and; IS-QUINE(g,b))</span>
+    </center>
+    <p>This looks very similar to <span class="num">G<sub>0</sub></span>, except that we have replaced the free variable <span class="mtnt">a</span> with the concrete number <span class="num">g</span>. In English, this says that "there is no number <span class="num">b</span> that corresponds to both a theorem of mTNT and the quine of <span class="num">G<sub>0</sub></span>", or more clearly: "the quine of <span class="num">G<sub>0</sub></span> is not a theorem of mTNT". But what is the quine of <span class="num">G<sub>0</sub></span>? <span class="num"><em>G</em></span> itself! Thus, <span class="num"><em>G</em></span> asserts precisely:</p>
+      <blockquote>
+        <span class="num"><em>G</em></span> is not a theorem of mTNT.
+      </blockquote>
+      <p>This was our goal from the beginning: we have transplanted the Epimenides paradox into mTNT, thus proving that it (and any system of similar power) cannot be both consistent and complete. &square;</p>
+
+    <h2><span>Some Implications of the Theorem</span></h2>
+    <p>G&ouml;del's theorems were the first in a series of profound results in meta-mathematics that were discovered in the early twentieth century. Other famous results of similar nature include Tarski's theorem about the non-representability of truth and Turing's proof that the halting problem is undecidable.</p>
+    <p>In particular, G&ouml;del threw quite the wrench into the efforts of David Hilbert, one of the preeminent mathematicians of the nineteenth and twentieth centuries. Hilbert, and many others, had proposed to undertake the ambitious program of formalizing all known mathematics under a single axiomatic system. This would be quite the crowning achievement: all of human mathematical knowledge unified under a single system! The mathematicians of the time wanted to do for all of mathematics what Euclid had tried to do for plane geometry two millennia ago.</p>
+    <p>Unfortunately, G&ouml;del poked a rather large hole in their efforts by proving that such a system was impossible. That is not to say that there are not useful "foundations of mathematics", such as set theory and category theory, but that we must be keenly aware of the shortcomings of any such formalization. There are also interesting philosophical arguments about knowledge and intelligence that can be derived from G&ouml;del's theorems (and other theorems of meta-mathematics); Hofstadter gives the example (and provides a counter-argument) of Lucas's argument for the existence of souls.</p>
+    <p>The fields of meta-mathematics and philosophy are rich with similarly interesting problems, but these are well beyond the scope of this document (and indeed, beyond the ken of its author).</p>
+
+    <h2><span>References</span></h2>
+    <p>A lot of the information in this document came from Hofstadter. If this document was vaguely interesting, I'd recommend reading his book <em>G&ouml;del, Escher, Bach: An Eternal Golden Braid</em>. I also referenced the Wikipedia article for G&ouml;del's incompleteness theorems when writing this document.</p>
+  </main>
+</body>
+</html>
+

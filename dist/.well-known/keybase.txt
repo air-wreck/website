@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/ericzheng
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://www.ericzheng.org
+  * I am ericzheng (https://keybase.io/ericzheng) on keybase.
+  * I have a public key ASAUTCy-v56X2qedn8Cwb39jMP_Ax2LBRbXNbkn-hFDFggo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120144c2cbebf9e97daa79d9fc0b06f7f6330ffc0c762c145b5cd6e49fe8450c5820a",
+      "host": "keybase.io",
+      "kid": "0120144c2cbebf9e97daa79d9fc0b06f7f6330ffc0c762c145b5cd6e49fe8450c5820a",
+      "uid": "d596344a01b543fc84237b086a30aa19",
+      "username": "ericzheng"
+    },
+    "merkle_root": {
+      "ctime": 1566788172,
+      "hash": "3b0f529e539ae23507345412ba876a8411a25349d1c61447a868436a79a51005e6724b0ee1e11eebca2a2ece54514bcd7508f333099f19d78a612aff8842096b",
+      "hash_meta": "6acdba55b2a72d13dc539e1d3136b96cc01de8d6612929efb7331a6c865f4454",
+      "seqno": 6098371
+    },
+    "service": {
+      "entropy": "JQ3dsUBsrUaT7AdJTLGqIEN6",
+      "hostname": "www.ericzheng.org",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "4.3.2"
+  },
+  "ctime": 1566788193,
+  "expire_in": 504576000,
+  "prev": "5ecd9341bb21ee8ea7656d769f03883ac818d5476855787380e6b0050d7cd27a",
+  "seqno": 4,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgFEwsvr+el9qnnZ/AsG9/YzD/wMdiwUW1zW5J/oRQxYIKp3BheWxvYWTESpcCBMQgXs2TQbsh7o6nZW12nwOIOsgY1UdoVXhzgOawBQ180nrEIIGrUaoRNUZQxUUjf7L2O3/cMCjH/MLKSMxf+HB5uIj5AgHCo3NpZ8RAgrmZ8Z+uOMFHLaWrjBIO+R5SRSWRoI3KyqxmJGf77u55WQSxjLy7KIPQU6n7NyeitQaWsFHOGEM295IIBQCRCKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIDouwXpAfRFawR4ceM2VWiZ73ns5b9ku2jPQQXhlH1Zdo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ericzheng
+
+==================================================================
