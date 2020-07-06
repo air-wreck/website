@@ -2,9 +2,6 @@
 *.swp
 erdos.html
 
-# build directory
-dist/*
-
 # purposely hidden files
 hidden/*
 

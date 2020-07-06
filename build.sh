@@ -24,4 +24,5 @@ rm $nav.tmp
 
 # some Github pages, Keybase, etc. stuff
 cp -R .well-known dist
+cp CNAME dist
 cp _config.yml dist

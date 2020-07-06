@@ -21,5 +21,10 @@ allow us to just serve from a subdirectory:
 $ git subtree push --prefix dist origin gh-pages
 ```
 
-I don't think there's anything particularly embarrassing in the commit history, so definitely don't bother looking.
+The only annoying part about this is that we now essentially keep track
+of each file twice. I guess I could just switch to Gitlab Pages or
+something, which apparently supports more flexible configurations, but
+oh well. This site isn't _that_ big anyway.
 
+I don't think there's anything particularly embarrassing in the commit
+history, so definitely don't bother looking.
