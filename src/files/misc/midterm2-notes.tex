@@ -1,0 +1,361 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{tcolorbox}
+
+% set up color box theorems
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{theorem}{Theorem}
+  {
+    colback=blue!5,
+    colframe=blue!35!black,
+    fonttitle=\bfseries
+  }{thm}
+
+% set up pretty remarks
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+
+% math definitions: I expect more will be added as I go along
+\def\gcd{\textrm{gcd}}
+\def\divides{\mid}
+
+\title{15-151 Midterm 2 Review}
+\author{Eric Zheng}
+\date{October 22, 2019}
+
+\begin{document}
+\maketitle
+
+\section{Named Theorems and Important Results}
+\begin{theorem}{Bezout's lemma}{bezout}
+  For all $a,b,c \in \mathbb{Z}$, the equation $ax+by=c$ has a solution
+  $x,y \in \mathbb{Z}$ if and only if $\gcd(a,b) \divides c$.
+\end{theorem}
+\begin{proof}
+  We will prove the bi-implication in each direction separately.
+  \begin{itemize}
+    \item ($\Longrightarrow$) Suppose $\exists x,y \in \mathbb{Z}$ such that
+      $ax+by=c$. By definition, $\gcd(a,b)$ must divide both $a$ and $b$, so
+      we can write:
+    \begin{equation*}
+      n\cdot\gcd(a,b) = a \quad\quad m\cdot\gcd(a,b) = b
+    \end{equation*}
+    for some $n,m \in \mathbb{Z}$. So we have:
+    \begin{align*}
+      c &= ax+by                               \\
+        &= nx\cdot\gcd(a,b) + my\cdot\gcd(a,b) \\
+        &= (nx+my)\cdot\gcd(a,b)
+    \end{align*}
+    Then $\gcd(a,b) \divides c$, as required.
+  \item ($\Longleftarrow$) We will prove this for $a,b \in \mathbb{N}$. Since
+    $x,y \in \mathbb{Z}$, the result holds in general. Consider the following
+    predicate:
+    \begin{equation*}
+      p(n) \coloneqq \textrm{``if $a+b=n$ and $\gcd(a,b) \divides c$, then
+        $\exists x,y \in \mathbb{Z}$ such that $ax+by=c$''}
+    \end{equation*}
+    We proceed by induction on $n=a+b$.
+    \begin{itemize}
+      \item \textit{Base case.} If $n=0$, then $a=b=0$, so $\gcd(a,b)=0$. Now
+        if $0 \divides c$, then $c=0$. Any $x,y \in \mathbb{Z}$ will satisfy
+        $ax+by=c$.
+      \item \textit{Induction step.} Let $n \ge 0$ be given, and assume that
+        $p(k)$ holds for all $k \le n$. Let $a,b \in \mathbb{N}$ such that
+        $a+b = n+1$, and suppose $c \in \mathbb{Z}$ such that
+        $\gcd(a,b) \divides c$. Then there are three cases:
+        \begin{enumerate}
+          \item Case $a=b=0$. This case is not possible, since $n+1 > 0$.
+          \item Case one of $a$ or $b$ is zero. Without loss of generality, let
+            $a=0$. Then $\gcd(a,b)=b$, so by the induction hypothesis,
+            $b \divides c$. By definition, $\exists y \in \mathbb{Z}$ such that
+            $by = c$.
+          \item Case $a,b > 0$. Without loss of generality, let $b \ge a$. Note
+            that $a + (b-a) = b$, and $b \in [n]$. Additionally, since
+            $\gcd(a,b-a)=\gcd(a,b)$, we have $\gcd(a,b-a) \divides c$. Now since
+            $p(b)$ is true, there must exist some $x_0,y_0 \in \mathbb{Z}$ such
+            that $ax_0+(b-a)y_0 = c$. But this implies that
+            $a(x_0-y_0) + by_0 = c$, so we have found a solution to $ax+by=c$.
+        \end{enumerate}
+    \end{itemize}
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}{coprime (Euclid's) lemma}{coprime}
+  For all $a,b,c \in \mathbb{Z}$, if $\gcd(a,b)=1$, then $a \divides bc$
+  implies that $a \divides c$.
+\end{theorem}
+\begin{proof}
+  Let $a,b,c \in \mathbb{Z}$ such that $\gcd(a,b)=1$. Now suppose that
+  $a \divides bc$. By Bezout's lemma (Theorem \ref{thm:bezout}),
+  $\exists x,y \in \mathbb{Z}$ such that $ax+by=1$. This implies that
+  $cax+cby=c$. Clearly, $a \divides cax$, and by our assumption,
+  $a \divides cby$. Thus, $a$ divides their sum, or $a \divides c$, as required.
+\end{proof}
+
+\begin{theorem}{solutions to linear Diophantine equations}{lindioph}
+  For all $a,b,c \in \mathbb{Z}$, if $x_0, y_0 \in \mathbb{Z}$ satisfy
+  $ax_0 + by_0 = c$, then for some $x,y \in \mathbb{Z}$, $ax+by=c$ if and only
+  if $x$ and $y$ are of the form:
+  \begin{equation*}
+    x = x_0 + \frac{b}{\gcd(a,b)} \cdot k\quad \quad
+    y = y_0 - \frac{a}{\gcd(a,b)} \cdot k
+  \end{equation*}
+  for some $k \in \mathbb{Z}$. (We have implicitly assumed that $\gcd(a,b) \neq
+  0$, which is true if at least one of $a$ and $b$ is nonzero.)
+\end{theorem}
+\begin{proof}
+  We will prove each direction of the bi-implication separately.
+  \begin{itemize}
+    \item ($\Longrightarrow$) Suppose $x_0,y_0 \in \mathbb{Z}$ satisfy
+      $ax_0+by_0=c$. Now consider another pair $x,y \in \mathbb{Z}$ which also
+      satisfy $ax+by=c$. Now note:
+      \begin{align*}
+                 & ax+by=c=ax_0+by_0                                       \\
+        \implies & a(x-x_0) = b(y_0-y)                                     \\
+        \implies & \frac{a}{\gcd(a,b)}(x-x_0) = \frac{b}{\gcd(a,b)}(y_0-y)
+      \end{align*}
+      Thus, we have:
+      \begin{align*}
+        \frac{a}{\gcd(a,b)} & \divides \frac{b}{\gcd(a,b)}(y_0-y) \\
+        \frac{b}{\gcd(a,b)} & \divides \frac{a}{\gcd(a,b)}(x-x_0)
+      \end{align*}
+      But observe that:
+      \begin{equation*}
+        \gcd\left(\frac{a}{\gcd(a,b)}, \frac{b}{\gcd(a,b)}\right) = 1
+      \end{equation*}
+      So by Euclid's lemma (Theorem \ref{thm:coprime}), we must have:
+      \begin{align*}
+        \frac{a}{\gcd(a,b)} \divides (y_0 - y) \implies
+          & y = y_0 - \frac{a}{\gcd(a,b)} \cdot k        \\
+        \frac{b}{\gcd(a,b)} \divides (x - x_0) \implies
+          & x = x_0 + \frac{b}{\gcd(a,b)} \cdot k
+      \end{align*}
+      for some $k \in \mathbb{Z}$. (It technically remains to be shown that the
+      $k$ in the expressions for $x$ and $y$ are the same, but this is easy to
+      do by contradiction.)
+    \item ($\Longleftarrow$) Let $x_0, y_0 \in \mathbb{Z}$ satisfy
+      $ax_0 + by_0 = c$, and consider some arbitrary $x,y$ of the form:
+      \begin{align*}
+        x &= x_0 + \frac{b}{\gcd(a,b)} \cdot k \\
+        y &= y_0 - \frac{a}{\gcd(a,b)} \cdot k
+      \end{align*}
+      for some $k \in \mathbb{Z}$. Now consider the linear combination $ax+by$:
+      \begin{align*}
+        ax + by &= a\left(x_0 + \frac{b}{\gcd(a,b)} \cdot k\right)
+                 + b\left(y_0 - \frac{a}{\gcd(a,b)} \cdot k\right)           \\
+                &= ax_0 + by_0 + \frac{abk}{\gcd(a,b)}-\frac{abk}{\gcd(a,b)} \\
+                &= ax_0 + by_0                                               \\
+                &= c
+      \end{align*}
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}{Wilson's theorem}{wilson}
+  If $p \in \mathbb{N}$ is prime, then $(p-1)! \equiv -1 \bmod p$.
+\end{theorem}
+\begin{proof}
+  Observe that:
+  \begin{equation*}
+    (p-1)! = (p-1)(p-2)(p-3)\dots(3)(2)(1)
+  \end{equation*}
+  Since $(p-1)(1) \equiv -1 \bmod p$, it suffices to show instead that
+  \begin{equation*}
+    (p-2)(p-3)\dots(3)(2) \equiv 1 \bmod p
+  \end{equation*}
+  First, we note that since each term $a_k = (p-k)$ in this product is coprime
+  with $p$, by Bezout's lemma (Theorem \ref{thm:bezout}) it must have some
+  multiplicative inverse among the factors. That is, there must be an integer
+  solution to $a_kx + py = 1$ for all $2 \le k \le p - 2$. By definition, we
+  have $a_kx \equiv 1 \bmod p$, so $x$ is the multiplicative inverse of the
+  term $a_k$. Under modular arithmetic, we can take $0 \le x < p-1$, yet $x$
+  cannot be $0$, $1$, or $p-1$. Thus, every term $a_k$ has a multiplicative
+  inverse that is another term $a_i$.
+
+  Next, we show that no term $a_k$ is its own inverse. If we had
+  $a_k^2 \equiv 1 \bmod p$, then $a_k^2-1 \equiv (a_k+1)(a_k-1) \equiv 0
+  \bmod p$. Since $p$ is prime, this implies that $a_k \equiv \pm 1 \bmod p$.
+  (This was a homework exercise!) But $a_k \not\equiv \pm 1 \bmod p$ if we take
+  $k$ between $2$ and $p-2$, so the inverse of each $a_k$ must be distinct from
+  $a_k$ itself.
+
+  From these two results, it follows that we can pair each term $a_k$ with its
+  multiplicative inverse, so the resulting product must be $1$, as required.
+\end{proof}
+
+\begin{theorem}{Fermat's little theorem}{fermat}
+  If $p \in \mathbb{N}$ is prime, then for all $a \in \mathbb{Z}$, $a^p \equiv
+  a \bmod p$. If we additionally have $\gcd(a,p) = 1$, then $a^{p-1} \equiv 1
+  \bmod p$.
+\end{theorem}
+\begin{proof}
+  We will prove the second version of this theorem (which requires that
+  $\gcd(a,p) = 1$). Let $p \in \mathbb{N}$ be prime, and denote $S = \{a, 2a,
+  \dots, (p-1)a\}$. We note two things:
+  \begin{enumerate}
+    \item No distinct $x,y \in S$ satisfy $x \equiv y \bmod p$. To show this,
+      assume for the sake of contradiction that $ma \equiv na \bmod p$ for some
+      $m,n \in [p-1]$, yet $m \neq n$. Then $p \divides a(m-n)$, so we must have
+      $p \divides a$ or $p \divides m-n$ since $p$ is prime. But $\gcd(a,p)=1$,
+      so $p \nmid a$, and $m-n \in [p-1]$, so $p \nmid m-n$ by irreducibility.
+      This is a contradiction, so our assumption is false.
+    \item For each $x \in S$, $\exists y \in [p-1]$ such that $x \equiv y
+      \bmod p$. We note that, under modulus $p$, each $x \in S$ must be
+      congruent to some $0 \le y < p$. But observe that $y \neq 0$, since
+      otherwise, it would follow that $p \divides x$. Again, this is not
+      possible by the irreducibility of $p$ (see Theorem \ref{thm:prime-irr}).
+  \end{enumerate}
+  Now consider the product $a^{p-1}(p-1)!$ of all the elements in $S$. As we
+  have shown, each distinct $x \in S$ is congruent to some distinct $y \in
+  [p-1]$, so the elements are congruent to a permutation of $[p-1]$. It follows
+  that:
+  \begin{equation*}
+    a^{p-1}(p-1)! \equiv (p-1)! \bmod p
+  \end{equation*}
+  And since, by Bezout's lemma (Theorem \ref{thm:bezout}), each $y \in [p-1]$
+  has some multiplicative inverse, this is equivalent to saying:
+  \begin{equation*}
+    a^{p-1} \equiv 1 \bmod p
+  \end{equation*}
+  as required.
+\end{proof}
+
+\begin{theorem}{Euler's theorem}{euler}
+  For all $a \in \mathbb{Z}$, $n \in \mathbb{N}$, if $\gcd(a,n) = 1$, then
+  $a^{\varphi(n)} \equiv 1 \bmod n$.
+\end{theorem}
+
+\begin{remark}
+  Note that Fermat's little theorem (Theorem \ref{thm:fermat}) is a special case
+  of Euler's theorem (Theorem \ref{thm:euler}). Euler's theorem will not be on
+  the exam, but it can't hurt to know it.
+\end{remark}
+
+\section{Other Interesting Results from Class}
+\begin{theorem}{equivalence of primality and irreducibility}{prime-irr}
+  An integer $p$ is prime if and only if it is irreducible.
+\end{theorem}
+\begin{proof}
+  We will prove each direction of the bi-implication separately.
+  \begin{itemize}
+    \item ($\Longrightarrow$) Let $p \in \mathbb{Z}$ be a prime number. Now
+      suppose we can express $p$ as $p = ab$ for some $a,b \in \mathbb{Z}$. Then
+      $p \divides ab$, so by definition, $p \divides a$ or $p \divides b$.
+      Without loss of generality, let $p \divides a$. Now $pq = a$ for some
+      $q \in \mathbb{Z}$, so $p = ab \implies p = pqb \implies 1 = qb$. It
+      follows that $b$ must be a unit, so $p$ is irreducible.
+    \item ($\Longleftarrow$) Let $p \in \mathbb{Z}$ be irreducible, and suppose
+      that $p \divides ab$. Now there are two cases:
+      \begin{itemize}
+        \item Case $p \divides a$. In this case, $p$ is prime by definition.
+        \item Case $p \nmid a$. In this case, note that, by irreducibility, the
+          only factors of $p$ are $\{\pm 1, \pm p\}$. Since $p \neq a$
+          (otherwise, $p \divides a$), we must have $\gcd(p,a)=1$. Then by
+          Euclid's lemma (Theorem \ref{thm:coprime}), we must have
+          $p \divides b$, so $p$ is prime by definition.
+      \end{itemize}
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}{existence of prime factorization}{exist-fact}
+  For all $n \in \mathbb{N}$ such that $n \ge 2$, $n$ can be factored into the
+  product of prime numbers.
+\end{theorem}
+\begin{proof}
+  Let $p(n) \coloneqq \textrm{``$n$ can be factored into the product of prime
+  numbers''}$. We will proceed by strong induction on $n$.
+  \begin{itemize}
+    \item \textit{Base case.} Consider $n=2$. Since $2$ is prime, $p(2)$ holds.
+    \item \textit{Induction step.} Let $n \ge 2$ be given, and assume that
+      $p(k)$ holds for all $2 \le k \le n$. Now consider $n+1$. There are two
+      possibilities:
+      \begin{enumerate}
+        \item Case $n+1$ is prime. Then $p(n+1)$ is true.
+        \item Case $n+1$ is not prime. Then we can write $n+1 = ab$ for some
+          non-unit, non-zero $a, b \in \mathbb{N}$. But since $2 \le a,b \le n$,
+          we know that $a$ and $b$ factor into primes by invoking the induction
+          hypothesis. Thus, $n+1 = ab$ must factor into primes.
+      \end{enumerate}
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}{uniqueness of prime factorization}{uniq-fact}
+  For all $n \in \mathbb{N}$ such that $n \ge 2$, $n$ can be uniquely factored
+  into the product of prime numbers.
+\end{theorem}
+\begin{proof}
+  Consider the predicate:
+  \begin{equation*}
+    p(n) \coloneqq \textrm{``$n$ can be factored uniquely into the product of
+                              primes''}
+  \end{equation*}
+  We proceed by strong induction on $n \ge 2$.
+  \begin{itemize}
+    \item \textit{Base case.} Let $n=2$. There is only one way to factor $2$ 
+      into primes, namely $p_1=q_1=2$. Thus, $p(2)$ holds.
+    \item \textit{Induction step.} Let $n \ge 2$ be given, and assume that
+      $p(i)$ holds for all $2 \le i \le n$. Consider two prime factorizations
+      written in non-decreasing order:
+      \begin{align*}
+        n+1 &= p_1 \cdot p_2 \cdot p_3 \cdots p_k \\
+            &= q_1 \cdot q_2 \cdot q_3 \cdots q_l
+      \end{align*}
+      Without loss of generality, let $p_1 \le q_1$. Now since $p_1$ is prime
+      and divides $q_1 \cdot q_2 \cdots q_l$, we must have $p_1 = q_i$ for
+      some $i \in [l]$. But since the $q$'s are in non-decreasing order, we must
+      have $q_1 \le q_i = p_1$. Since $p_1 \le q_1 \le p_1$, we must have $p_1 =
+      q_1$. Then:
+      \begin{equation*}
+        p_2 \cdot p_3 \cdots p_k = q_2 \cdot q_3 \cdots q_l
+      \end{equation*}
+      Now there are two possibilities:
+      \begin{enumerate}
+        \item If there are no more prime factors, then we have shown $p(n+1)$ to
+          be true.
+        \item Otherwise, $2 \le p_2 \cdot p_3 \cdots p_k \le n$. In this case,
+          we invoke the induction hypothesis to show that $p(n+1)$ is true.
+      \end{enumerate}
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}{divisibility tricks}{div-tricks}
+  Let $n \in \mathbb{N}$ have the base-ten expansion $d_0d_1d_2 \dots d_r$. We
+  claim:
+  \begin{enumerate}
+    \item $n \equiv \sum _{i=0} ^{r} d_i \bmod 3$
+    \item $n \equiv \sum _{i=0} ^{r} d_i \bmod 9$
+    \item $n \equiv \sum _{i=0} ^{r} (-1)^{i} d_i \bmod 11$
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  Note that the decimal expansion satisfies:
+  \begin{equation*}
+    n = \sum _{i=0} ^r d_i 10^i
+  \end{equation*}
+  Now examining each trick:
+  \begin{enumerate}
+    \item Observe that $10 \equiv 1 \bmod 3$, so $10^k \equiv 1^k \equiv 1
+      \bmod 3$ for all $k \in \mathbb{N}$.
+    \item Observe that $10 \equiv 1 \bmod 9$, so $10^k \equiv 1^k \equiv 1
+      \bmod 9$ for all $k \in \mathbb{N}$.
+    \item Observe that $10 \equiv -1 \bmod 11$, so $10^k \equiv (-1)^k \bmod 11$
+      for all $k \in \mathbb{N}$.
+  \end{enumerate}
+\end{proof}
+
+\section{Eric's Personal Reminders}
+Here are a few things that I tend to forget easily:
+\begin{enumerate}
+  \item Don't gloss over induction mechanics! In particular, remember to define
+    the predicate as $p(n) \coloneqq \textrm{``$\dots$''}$. Also quantify stuff
+    where appropriate.
+  \item Don't forget the exponent in Fermat's little theorem (Theorem
+    \ref{thm:fermat}) is $p-1$, \textbf{not} $p$. On a similar note, the theorem
+    has the requirement that $a$ and $p$ be coprime.
+  \item Go over the divisibility tricks before the exam!
+\end{enumerate}
+\end{document}

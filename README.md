@@ -1,17 +1,25 @@
-# website
+# Website
 
-Just the source for my personal website. I used to host this on GitLab Pages (which is in some ways better), but then GitLab started serving the wrong SSL cert, so I've migrated here.
+This is just the source for my personal website. I am now officially
+using a "static site generator" (okay, basically just Pandoc + a couple
+of Bash scripts). Actually, most of the content is still just written in
+HTML, but the `/thoughts` are written in Markdown. (This is mostly to
+support nice things like code highlighting.)
 
-Upsides of this migration:
+I don't know why you'd want to run my "static site generator", but just
+in case _I_ forget how this all works, it's just
 
-* automatic SSL cert handling
-* faster page deployment
+``` bash
+$ make site && make serve
+```
 
-Downsides of this migration:
+from the project root directory to run locally. To deploy to Github, we
+now need to use a separate `gh-pages` branch, since Github will not
+allow us to just serve from a subdirectory:
 
-* everything is public
-* less deployment flexibility
-* no more cryptomining
+``` bash
+$ git subtree push --prefix dist origin gh-pages
+```
 
 I don't think there's anything particularly embarrassing in the commit history, so definitely don't bother looking.
 
