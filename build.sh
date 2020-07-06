@@ -21,3 +21,7 @@ for file in $(find $dest -name "*.html"); do
   sed -i "s/<!-- NAV -->/$(cat $nav.tmp)/g" $file
 done
 rm $nav.tmp
+
+# some Github pages, Keybase, etc. stuff
+cp -R .well-known dist
+cp _config.yml dist
