@@ -1,0 +1,15 @@
+.container {
+  text-align: center;
+}
+.model {
+  text-align: left;
+  margin: 0 auto;
+  width: 640px;
+  background-color: #dbdbdb;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+.model h3 {
+  display: inline;
+}
