@@ -2,7 +2,7 @@
 
 > **Remark:** If you are viewing this repository on Github, note that I
 > have switched over to Gitlab Pages to host this site because they
-> more flexibility. This repository is no longer updated.
+> offer more flexibility. This repository is no longer updated.
 
 This is just the source for my personal website. I am now officially
 using a "static site generator" (okay, basically just Pandoc + a couple

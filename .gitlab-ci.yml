@@ -1,4 +1,4 @@
-image: pandoc/ubuntu
+image: pandoc/core:latest
 
 pages:
   script:
