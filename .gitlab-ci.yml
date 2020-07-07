@@ -1,4 +1,4 @@
-image: ericzheng:eric-website/latest
+image: ericzheng/eric-website:latest
 
 pages:
   script:
