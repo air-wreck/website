@@ -3,7 +3,7 @@ image: ericzheng/eric-website:latest
 pages:
   script:
     - pwd
-    - make website
+    - make site
   artifacts:
     paths:
       - public
