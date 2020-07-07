@@ -2,6 +2,9 @@
 *.swp
 erdos.html
 
+# built site
+public/*
+
 # purposely hidden files
 hidden/*
 

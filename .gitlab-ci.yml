@@ -1,0 +1,8 @@
+image: pandoc/ubuntu
+
+pages:
+  script:
+    - make site
+  artifacts:
+    paths:
+      - public
