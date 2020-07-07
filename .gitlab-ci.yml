@@ -1,8 +1,8 @@
-image: pandoc/ubuntu-core:latest
+image: pandoc/core:latest
 
 pages:
   script:
-    - make site
+    - ./build.sh
   artifacts:
     paths:
       - public
