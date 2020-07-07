@@ -2,7 +2,7 @@
 
 # run this from the project root directory to build thoughts/
 dir=src/thoughts
-dest=dist/thoughts
+dest=public/thoughts
 
 mkdir -p $dest
 

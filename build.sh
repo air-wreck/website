@@ -2,7 +2,7 @@
 
 # run this from the project root directory to build the overall site
 dir=src
-dest=dist
+dest=public
 
 mkdir -p $dest
 
@@ -23,6 +23,6 @@ done
 rm $nav.tmp
 
 # some Github pages, Keybase, etc. stuff
-cp -R .well-known dist
-cp CNAME dist
-cp _config.yml dist
+cp -R .well-known $dest
+cp CNAME $dest
+cp _config.yml $dest

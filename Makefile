@@ -5,7 +5,7 @@ site:
 > ./build.sh
 
 clean:
-> rm -rf dist && mkdir -p dist
+> rm -rf public && mkdir -p public
 
 serve:
-> python3 -m http.server -d dist
+> python3 -m http.server -d public
