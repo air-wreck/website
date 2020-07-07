@@ -1,10 +1,9 @@
-image: pandoc/core:latest
+image: ericzheng:eric-website/latest
 
 pages:
   script:
     - pwd
-    - ls
-    - ./build.sh
+    - make website
   artifacts:
     paths:
       - public
