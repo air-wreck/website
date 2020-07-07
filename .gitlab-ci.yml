@@ -2,6 +2,8 @@ image: pandoc/core:latest
 
 pages:
   script:
+    - pwd
+    - ls
     - ./build.sh
   artifacts:
     paths:
